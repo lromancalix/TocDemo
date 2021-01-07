@@ -9,6 +9,9 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { ValidacionesComponent } from './pages/validaciones/validaciones.component';
 import { ComponentsModule } from './components/components.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,9 @@ import { ComponentsModule } from './components/components.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule
+    FormsModule,
+    ComponentsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

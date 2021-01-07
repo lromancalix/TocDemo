@@ -1,12 +1,9 @@
-<!-- <app-login></app-login> -->
+<app-login *ngIf="!logServ.isAuthenticated"></app-login>
 
+<div *ngIf="logServ.isAuthenticated">
+  <app-navbar></app-navbar>
 
-<app-navbar></app-navbar>
-
-<div class="m-3">
+  <div class="m-3">
     <router-outlet></router-outlet>
+  </div>
 </div>
-
-
-    
-
