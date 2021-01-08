@@ -9,7 +9,7 @@ import { LoginService } from '../../services/login.service';
 export class NavbarComponent implements OnInit {
 
   logServ: LoginService;
-  //clx
+  
 
   constructor(logServ_: LoginService) { 
     this.logServ = logServ_;
