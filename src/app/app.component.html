@@ -1,6 +1,6 @@
-<app-login *ngIf="!logServ.isAuthenticated"></app-login>
+<app-login *ngIf="!isAuthenticated"></app-login>
 
-<div *ngIf="logServ.isAuthenticated">
+<div *ngIf="isAuthenticated">
   <app-navbar></app-navbar>
 
   <div class="m-3">
