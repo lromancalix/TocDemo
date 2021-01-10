@@ -9,18 +9,21 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  logServ: AuthService;
 
-  constructor(logServ_: AuthService) { 
-    this.logServ = logServ_;
+  constructor(private logServ: AuthService) { 
+   
   }
 
   ngOnInit(): void {
+    this.logServ.LogOut();
   }
 
   LogIn() {
+    console.log("Entrando..");
     
-    this.logServ.LogIn();
+    this.logServ.LogIn("","");
+
+
   }
 
 }

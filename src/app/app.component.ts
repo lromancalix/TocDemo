@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login.service';
 import { AuthService } from './services/auth/auth.service';
 
@@ -7,17 +7,26 @@ import { AuthService } from './services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'tocAPP';
 
-  isAuthenticated: boolean;
+  isAuthenticated = false;
 
   constructor(public logServ: AuthService) {
-    this.IsUserAuthenticated();
+    
   }
 
-  IsUserAuthenticated() {
-    this.isAuthenticated = this.logServ.isUserActive();
+  ngOnInit(): void {
+    
+    this.logServ.isAutenticated$().subscribe( response => {
+      console.log('component: ', response);
+      this.isAuthenticated = response;
+    } );
+    
   }
+
+
+
+  
 
 }

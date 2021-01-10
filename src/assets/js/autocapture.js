@@ -186,15 +186,16 @@ if(window.jQuery){
       TOCautocapture(this.attr('id'), options);
     }
 
-    $('#container').autocapture({
-      locale: "es",
-      session_id: "SESSION ID HERE",
-      document_type: "CHL2",
-      document_side: "front",
-      callback: function(captured_token, image){ alert(token); },
-      failure: function(error){ alert(error); }
-      }
-      );
+    //<clx: Activar este código para captura de imagen en onboarding. />
+    // $('#container').autocapture({
+    //   locale: "es",
+    //   session_id: "SESSION ID HERE",
+    //   document_type: "CHL2",
+    //   document_side: "front",
+    //   callback: function(captured_token, image){ alert(token); },
+    //   failure: function(error){ alert(error); }
+    //   }
+    //   );
       
   }(jQuery));
 }
