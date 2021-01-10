@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  height: 150vh;
   background-image: linear-gradient(to right top, #051937, #113c63, #166491, #1490bf, #12beeb);
 }
 
@@ -49,7 +49,7 @@ h2 {
   background: #fff;
   padding: 30px;
   width: 90%;
-  max-width: 450px;
+  /* max-width: 450px; */
   position: relative;
   padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);

@@ -32,3 +32,8 @@ input[type="text"]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
+
+
+p > small {
+  color: red !important;
+}
