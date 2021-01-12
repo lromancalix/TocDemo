@@ -1,46 +1,114 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div
+      class="wrapper animate__animated animate__fadeInDown p-3"
+      style="width: 100% important;"
+    >
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-    <div class="card">
-      <div class="header">
-          <h2>Onboarding</h2>
-            <hr>
+        <div class="card">
+          <div class="header">
+            <h2>Validaciones</h2>
+            <hr />
+          </div>
+          <div class="card-body" style="padding: 0% !important">
+            <!-- Login Form -->
+            <form 
+              [formGroup] = "form"
+              (ngSubmit) = "Guardar()"
+              autocomplete="off" 
+              style="padding: 0% !important">
+
+              <div class=" m-0">
+                <div class="">
+                  <div>
+                    <input
+                      type="text"
+                      class="fadeIn second"
+                      name="Nombre"
+                      placeholder="Nombre"
+                      formControlName = "nombre"
+                    />
+                    <div *ngIf="EsNombreValido">
+                      <p class="animate__animated animate__fadeInDown" >
+                        <small>El nombre es requerido *</small>
+                      </p>
+                    </div>
+                  </div>
+    
+                  <div>
+                    <input
+                      type="text"
+                      class="fadeIn second"
+                      name="App"
+                      formControlName = "app"
+                      placeholder="Apellido Paterno"
+                    />
+                    <div *ngIf="EsAppValido">
+                      <p class="animate__animated animate__fadeInDown" >
+                        <small>El apellido paterno es requerido *</small>
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      class="fadeIn second"
+                      name="App"
+                      formControlName = "apm"
+                      placeholder="Apellido Materno"
+                    />
+                    <div *ngIf="EsApmValido">
+                      <p class="animate__animated animate__fadeInDown" >
+                        <small>El apellido materno es requerido *</small>
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      class="fadeIn second"
+                      name="App"
+                      placeholder="Identificación"
+                    />
+                    <!-- <small>Valor requerido</small> -->
+                  </div>
+                </div>
+                <div >
+                  <div 
+                    class="toc-autocapture-camera mt-2 ml-5 mr-5 mb-2" 
+                    id="container" 
+                    style="height: 200px; border: solid lightgray 1px;">
+                   
+                  </div>
+                </div>
+              </div>
+
+            
+
+
+           
+
+              <div id="formFooter">
+                <!-- <input type="submit" class="fadeIn fourth" value="Guardar"> -->
+                <button 
+                  [disabled]="form.invalid"
+                  type="submit"
+                  class="btn btn-info" 
+                  style="width: 100%">
+                  Guardar <i class="fa fa-save" aria-hidden="true"></i>
+                </button>
+              </div>
+           
+           
+           
+            </form>
+
+           
+          </div>
         </div>
-      <div class="card-body">
-        <!-- Login Form -->
-        <form autocomplete="off">
-          <input
-            type="text"
-            id="login"
-            class="fadeIn second"
-            name="Nombre"
-            placeholder="Nombre"
-          />
-          <input
-            type="text"
-            id="login"
-            class="fadeIn second"
-            name="App"
-            placeholder="Apellido Paterno"
-          />
-          <!-- <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"> -->
-
-          <!-- <input type="submit" class="fadeIn fourth" value="Log In"> -->
-        </form>
-        This is some text within a card body.
       </div>
     </div>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Ingresar</a>
-    </div>
-  </div>
-  <div class="mx-auto" style="color: white">
-    <h1>7OC</h1>
-  </div>
-  <div class="mx-auto" style="color: white">
-    <label>Biometric</label>
   </div>
 </div>
