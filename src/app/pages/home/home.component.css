@@ -1,0 +1,17 @@
+h2 {
+    color: black;
+}
+
+.card {
+    width: [object Object]px; 
+	height: [object Object]px; 
+	background: #F8F8F8; 
+	border: solid #BDBDBD 1px; 
+	box-shadow: 1px 1px 20px grey inset; 
+	-webkit-box-shadow: 1px 1px 20px grey inset; 
+	-moz-box-shadow: 1px 1px 20px grey inset; 
+}
+
+.card :hover {
+    cursor: pointer;
+}
