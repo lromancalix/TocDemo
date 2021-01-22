@@ -1,45 +1,77 @@
-<div class="wrapper fadeInDown">
+<!-- Login Form -->
+<form [formGroup]="formLogin" (ngSubmit)="Capturar()" autocomplete="off">
+  <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
-  
+
       <!-- Icon -->
       <div class="fadeIn first">
-        <img src="./assets/img/angular.png" id="icon" alt="User Icon" height="250"/>
+        <img
+          src="./assets/img/angular.png"
+          id="icon"
+          alt="User Icon"
+          height="250"
+        />
       </div>
-  
-      <!-- Login Form -->
-      <form>
-        <input 
+
+      <input
         type="text"
-         id="login" 
-         class="fadeIn second" 
-         name="email" 
-         placeholder="email">
-        <!-- <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"> -->
+        id="txt-login"
+        class="fadeIn second"
+        name="usuario"
+        formControlName="usuario"
+        placeholder="usuario"
+      />
+      <div *ngIf="EsUsuarioValido">
+        <p class="animate__animated animate__fadeInDown">
+          <small class="text-danger">El usuario es requerido *</small>
+        </p>
+      </div>
 
+      <div class="mx-auto reconocimiento"></div>
 
-        <div class="mx-auto reconocimiento"></div>
-        <div class="mx-auto"> <small>Reconocimiento</small> </div>
-        
-        <!-- <input type="submit" class="fadeIn fourth" value="Log In"> -->
-      </form>
-      
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <!-- <a 
-        click="LogIn()"
-        class="underlineHover"   
-        href="#">Ingresar</a> -->
-
-        <button class="btn btn-info" (click)="LogIn()">Ingresar</button>
+        <button
+          type="submit"
+          [disabled]="formLogin.invalid"
+          class="btn btn-info btn-login"
+        >
+          Ingresar
+        </button>
       </div>
-  
     </div>
-    <div class="mx-auto" style="color: white;">
-        <h1>7OC</h1>
-   </div>
-    <div class="mx-auto" style=" color: white;">
-        <label>Biometric</label>
-   </div>
-</div>
+    
 
+    <button 
+      id="link-login" 
+      (click)="LogIn()" 
+      class="btn btn-info btn-login"
+      style="display: none;">
+      entrar
+    </button>
+
+    <div class="mx-auto" style="color: white">
+      <h1>7OC</h1>
+    </div>
+    <div class="mx-auto" style="color: white">
+      <label>Biometric</label>
+    </div>
+  </div>
+</form>
+
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Captura</h5>
+      </div>
+      <div class="modal-body" id="liveness">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <p>Espere un momento por favor...</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { FooteroneComponent } from './footerone/footerone.component';
+import { LivenesscamComponent } from './livenesscam/livenesscam.component';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, FooteroneComponent],
+  declarations: [NavbarComponent, FooteroneComponent, LivenesscamComponent],
   exports: [
     NavbarComponent,
     FooteroneComponent

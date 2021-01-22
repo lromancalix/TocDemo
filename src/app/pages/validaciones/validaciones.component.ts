@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+declare var $:any;
 
 @Component({
   selector: 'app-validaciones',
@@ -8,9 +9,32 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ValidacionesComponent implements OnInit {
 
-  form: FormGroup
+  form: FormGroup;
+
+  
 
   constructor(private fb: FormBuilder) { }
+
+
+  ngAfterViewInit(){
+    $(document).ready(function(){
+
+      $("#btn-foto-validaciones").click(function() {
+        $("#liveness").liveness({
+          locale: "es",
+          session_id: "dba340d2230c4a7eb06582492d676242",
+          http: true,
+          callback: function (token) {
+            alert(token);
+          },
+          failure: function (error) {
+            alert(error);
+          },
+        });
+      });
+
+    });
+}
 
   ngOnInit(): void {
     this.buildForm();
@@ -35,12 +59,33 @@ export class ValidacionesComponent implements OnInit {
   }
 
   Guardar() {
-    if ( ! this.form.valid ) {
-      console.log('Formulario invalido');
-      return;
-    }
-
-    console.log("Guardado");
+    
   }
+
+  CapturarImagen() {
+    if ( this.form.valid ) {
+      this.MostrarModal();
+    }
+  }
+
+  private MostrarModal() {
+    $(".modal").show();
+
+   $("#liveness").liveness({
+     locale: "es",
+     session_id: $("#txt-nombre").val(),
+     http: true,
+     callback: function (token) {
+       $(".modal").hide();
+       alert("Usuario válido!");
+     },
+     failure: function (error) {
+       alert( error);
+       $(".modal").hide();
+       alert("Ocurrió un error al capturar la imagen.");
+     },
+   });
+ }
+
 
 }

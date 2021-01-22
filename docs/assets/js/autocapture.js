@@ -186,10 +186,10 @@ if(window.jQuery){
       TOCautocapture(this.attr('id'), options);
     }
 
-    //<clx: Activar este código para captura de imagen en onboarding. />
+    // //<clx: Activar este código para captura de imagen en onboarding. />
     // $('#container').autocapture({
     //   locale: "es",
-    //   session_id: "SESSION ID HERE",
+    //   session_id: "46aa1f2641c9492088c7d159cfce308a",
     //   document_type: "CHL2",
     //   document_side: "front",
     //   callback: function(captured_token, image){ alert(token); },
