@@ -56,7 +56,8 @@
       <h1>7OC</h1>
     </div>
     <div class="mx-auto" style="color: white">
-      <label>Biometric</label>
+      <label *ngIf="!cargando">Biometric</label>
+      <label *ngIf="cargando">Espere un momento...</label>
     </div>
   </div>
 </form>

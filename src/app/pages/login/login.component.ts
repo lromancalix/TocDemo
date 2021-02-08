@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
  
   public sesionToken: string;
+  cargando: boolean;
 
   constructor(
     private logServ: AuthService, 
@@ -46,8 +47,9 @@ export class LoginComponent implements OnInit {
   Capturar() {
     
     if ( this.formLogin.valid ) {
-
+      this.cargando = true;
       this.serviceToc.getTocTokenPromise().then(() => {
+        this.cargando = false;
         this.sesionToken = this.serviceToc.tokenGenerado;
         this.MostrarModal( this.sesionToken );
       });
