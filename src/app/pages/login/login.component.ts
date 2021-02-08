@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TocTokenService } from '../../services/Toc/toc-token.service';
 declare var $:any;
 
 @Component({
@@ -12,8 +13,13 @@ declare var $:any;
 export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
+ 
+  public sesionToken: string;
 
-  constructor(private logServ: AuthService, private fb: FormBuilder) { 
+  constructor(
+    private logServ: AuthService, 
+    private fb: FormBuilder,
+    private serviceToc: TocTokenService) { 
    
   }
 
@@ -40,17 +46,22 @@ export class LoginComponent implements OnInit {
   Capturar() {
     
     if ( this.formLogin.valid ) {
-      this.MostrarModal();
+
+      this.serviceToc.getTocTokenPromise().then(() => {
+        this.sesionToken = this.serviceToc.tokenGenerado;
+        this.MostrarModal( this.sesionToken );
+      });
+      
     }
    
   }
 
-  private MostrarModal() {
+  private MostrarModal( sesion: string ) {
      $(".modal").show();
 
     $("#liveness").liveness({
       locale: "es",
-      session_id: $("#txt-login").val(),
+      session_id: sesion,
       http: true,
       callback: function (token) {
         $(".modal").hide();
