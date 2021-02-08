@@ -1,0 +1,7 @@
+{
+    "/session-manager/*" : {
+    "target": "https://sandbox-api.7oc.cl",
+    "secure": false,
+    "changeOrigin": true
+    }
+}

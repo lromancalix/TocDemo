@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { eVistaOnboarding } from '../../interfaces/enums';
 
 @Component({
   selector: 'app-onboarding',
@@ -9,8 +10,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class OnboardingComponent implements OnInit {
 
   form: FormGroup
+  eVista = eVistaOnboarding;
 
-  constructor(private fb: FormBuilder) { }
+  vistaActiva: any;
+ 
+
+  constructor(private fb: FormBuilder) {
+    this.vistaActiva = this.eVista.CapturaID;
+   }
 
   ngOnInit(): void {
     this.buildForm();
@@ -35,12 +42,21 @@ export class OnboardingComponent implements OnInit {
   }
 
   Guardar() {
-    if ( ! this.form.valid ) {
-      console.log('Formulario invalido');
+    if ( this.form.valid ) {
+      this.siguienteVista();
       return;
     }
 
-    console.log("Guardado");
+    
+  }
+
+  siguienteVista() {
+    //if( this.vistaActiva === this.eVista.DatosOnboarding ) {}
+    this.vistaActiva ++;
+  }
+
+  vistaAnterior() {
+    this.vistaActiva = this.vistaActiva - 1;
   }
 
 }

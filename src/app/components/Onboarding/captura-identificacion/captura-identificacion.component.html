@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-12">
+    <div
+      id="contenedor2"
+      class="w-75 mx-auto"
+      style="background-color: red; height: 350px"
+    ></div>
+  </div>
+
+  <div class="col-md-12 mx-auto mt-2 mb-2">
+    <select name="cars" id="myselect">
+      <!-- <option value="CHL1">CHL1 - Documento de identidad chileno antiguo</option>
+      <option value="CHL2">CHL2 - Documento de identidad chileno nuevo</option>
+      <option value="PER1">PER1 - Documento de identidad peruano antiguo</option>
+      <option value="PER2">PER2 - Documento de identidad peruano nuevo</option>
+      <option value="COL1">COL1 - Documento de identidad colombiano</option>
+      <option value="ARG1">ARG1 - Documento de identidad argentino antiguo</option> -->
+      <!-- <option value="ARG2">ARG2 - Documento de identidad argentino nuevo</option> -->
+      <option value="MEX1">MEX1 - Documento electoral mexicano emitido por el IFE</option>
+      <option value="MEX2">MEX2 - Documento electoral mexicano emitido por el INE</option>
+    </select>
+  </div>
+  <div class="col-md-12 mx-auto mt-2 mb-2">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button
+        type="button"
+        (click)="CapturarIdentificacion()"
+        class="btn btn-secondary"     
+        [ngClass] ="{ 
+            'btn-secondary' : statusFrontal == statusCaptura.SinCapturar ,
+            'btn-success': statusFrontal == statusCaptura.CapturaExitosa            
+          }"   
+      >
+        Capturar frente
+
+
+        <i 
+          class="fa fa-camera" 
+          *ngIf="statusFrontal == statusCaptura.SinCapturar"
+          aria-hidden="true"></i>
+
+        <i 
+        class="fa fa-check-circle-o text-success" 
+        *ngIf="statusFrontal == statusCaptura.CapturaExitosa"
+        aria-hidden="true"></i>
+       
+        <i 
+        class="fa fa-times text-danger" 
+        *ngIf="statusFrontal == statusCaptura.CarturaFallada"
+        aria-hidden="true"></i>
+
+
+      </button>
+      
+      <button 
+      type="button" 
+      class="btn btn-success"
+      (click)="statusFrontal = statusCaptura.CapturaExitosa">
+      Capturar reverso      
+    </button>
+
+
+      <button type="button" class="btn btn-success" (click)="ObtenerToken()">Crear Token</button>
+    </div>
+    <input type="text" id="txt-token" value="{{tocToken}}" />
+  </div>
+</div>

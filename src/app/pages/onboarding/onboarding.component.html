@@ -2,7 +2,7 @@
   <div class="col-md-8 mx-auto">
     <div
       class="wrapper animate__animated animate__fadeInDown p-3"
-      style="width: 100% important;"
+      style="width: 100% important"
     >
       <div id="formContent">
         <!-- Tabs Titles -->
@@ -14,98 +14,118 @@
           </div>
           <div class="card-body" style="padding: 0% !important">
             <!-- Login Form -->
-            <form 
-              [formGroup] = "form"
-              (ngSubmit) = "Guardar()"
-              autocomplete="off" 
-              style="padding: 0% !important">
-
+            <form
+              [formGroup]="form"
+              (ngSubmit)="Guardar()"
+              autocomplete="off"
+              style="padding: 0% !important"
+            >
               <div class="row m-0">
-                <div class="col-md-8">
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="Nombre"
-                      placeholder="Nombre"
-                      formControlName = "nombre"
-                    />
-                    <div *ngIf="EsNombreValido">
-                      <p class="animate__animated animate__fadeInDown" >
-                        <small>El nombre es requerido *</small>
-                      </p>
+                <div class="col-md-12">
+                  <div
+                    class="datos-onboarding"
+                    *ngIf="vistaActiva === eVista.DatosOnboarding"
+                  >
+                    <div>
+                      <div>
+                        <input
+                          type="text"
+                          class="fadeIn second"
+                          name="Nombre"
+                          placeholder="Nombre"
+                          formControlName="nombre"
+                        />
+                        <div *ngIf="EsNombreValido">
+                          <p class="animate__animated animate__fadeInDown">
+                            <small>El nombre es requerido *</small>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          class="fadeIn second"
+                          name="App"
+                          formControlName="app"
+                          placeholder="Apellido Paterno"
+                        />
+                        <div *ngIf="EsAppValido">
+                          <p class="animate__animated animate__fadeInDown">
+                            <small>El apellido paterno es requerido *</small>
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          class="fadeIn second"
+                          name="App"
+                          formControlName="apm"
+                          placeholder="Apellido Materno"
+                        />
+                        <div *ngIf="EsApmValido">
+                          <p class="animate__animated animate__fadeInDown">
+                            <small>El apellido materno es requerido *</small>
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          class="fadeIn second"
+                          name="App"
+                          placeholder="identificación"
+                        />
+                        <!-- <small>Valor requerido</small> -->
+                      </div>
                     </div>
                   </div>
-    
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      formControlName = "app"
-                      placeholder="Apellido Paterno"
-                    />
-                    <div *ngIf="EsAppValido">
-                      <p class="animate__animated animate__fadeInDown" >
-                        <small>El apellido paterno es requerido *</small>
-                      </p>
-                    </div>
+
+                  <div
+                    class="captura-identificacion "
+                    *ngIf="vistaActiva === eVista.CapturaID"
+                  >
+                    <app-captura-identificacion></app-captura-identificacion>
                   </div>
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      formControlName = "apm"
-                      placeholder="Apellido Materno"
-                    />
-                    <div *ngIf="EsApmValido">
-                      <p class="animate__animated animate__fadeInDown" >
-                        <small>El apellido materno es requerido *</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      placeholder="identificación"
-                    />
-                    <!-- <small>Valor requerido</small> -->
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div 
-                    class="toc-autocapture-camera" 
-                    id="container_" 
-                    style="height: 250px; border: solid lightgray 1px;">
-                   
+
+                  <div
+                    class="captura-liveness"
+                    *ngIf="vistaActiva === eVista.CapturaLiveness"
+                  >
+                    <app-captura-liveness></app-captura-liveness>
                   </div>
                 </div>
               </div>
-
-            
-
-
-           
 
               <div id="formFooter">
                 <!-- <input type="submit" class="fadeIn fourth" value="Guardar"> -->
-                <button 
-                  [disabled]="form.invalid"
-                  type="submit"
-                  class="btn btn-info" 
-                  style="width: 100%">
-                  Guardar <i class="fa fa-save" aria-hidden="true"></i>
-                </button>
-              </div>
-           
-           
-           
-            </form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button
+                      [disabled]="vistaActiva >= eVista.CapturaLiveness || form.invalid"
+                      type="submit"
+                      class="btn btn-info"
+                    >
+                      Siguiente
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-12">
+                    <button                  
+                      class="btn btn-link"   
+                      *ngIf ="vistaActiva < eVista.CapturaID"
+                      (click)="vistaAnterior()"
+                    >
+                      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                      Regresar
+                    </button>
 
-           
+
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

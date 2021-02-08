@@ -5,3 +5,16 @@ export enum Role {
     recepcionista = 'RECEPCIONISTA',
     none = ''
 }
+
+
+export enum eVistaOnboarding {
+    DatosOnboarding = 1,
+    CapturaID = 2,
+    CapturaLiveness = 3
+}
+
+export enum eStatusCaptura {
+    SinCapturar = 1,
+    CapturaExitosa = 2,
+    CarturaFallada = 3
+}
