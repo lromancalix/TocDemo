@@ -71,22 +71,42 @@
                         </div>
                       </div>
                       <div>
-                        <input
+                        <!-- <input
                           type="text"
                           class="fadeIn second"
                           name="App"
                           placeholder="identificación"
-                        />
+                        /> -->
+
+                        <div>
+                          <select 
+                            class="fadeIn second"
+                            formControlName="identi">
+                            <option value="">Selecciona una identificación</option>
+                            <option
+                              *ngFor="let item of identificiones"
+                              [ngValue]="item"
+                            >
+                              {{ item.name }}
+                            </option>
+                          </select>
+
+                          <div *ngIf="EsIdentificacionValida">
+                            <p class="animate__animated animate__fadeInDown">
+                              <small>Se debe seleccionar una identificación*</small>
+                            </p>
+                          </div>
+                        </div>
                         <!-- <small>Valor requerido</small> -->
                       </div>
                     </div>
                   </div>
 
                   <div
-                    class="captura-identificacion "
+                    class="captura-identificacion"
                     *ngIf="vistaActiva === eVista.CapturaID"
                   >
-                    <app-captura-identificacion></app-captura-identificacion>
+                    <app-captura-identificacion [identificacion] ="identificacionSeleccionada"></app-captura-identificacion>
                   </div>
 
                   <div
@@ -103,7 +123,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button
-                      [disabled]="vistaActiva >= eVista.CapturaLiveness || form.invalid"
+                      [disabled]="
+                        vistaActiva >= eVista.CapturaLiveness || form.invalid
+                      "
                       type="submit"
                       class="btn btn-info"
                     >
@@ -112,16 +134,14 @@
                     </button>
                   </div>
                   <div class="col-md-12">
-                    <button                  
-                      class="btn btn-link"   
-                      *ngIf ="vistaActiva < eVista.CapturaID"
+                    <button
+                      class="btn btn-link"
+                      *ngIf="vistaActiva < eVista.CapturaID"
                       (click)="vistaAnterior()"
                     >
                       <i class="fa fa-arrow-left" aria-hidden="true"></i>
                       Regresar
                     </button>
-
-
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TipoIdentificacion } from 'src/app/interfaces/clases';
 import { eVistaOnboarding } from '../../interfaces/enums';
 
 @Component({
@@ -13,10 +14,20 @@ export class OnboardingComponent implements OnInit {
   eVista = eVistaOnboarding;
 
   vistaActiva: any;
+
+  TipoID: string;
+
+  identificacionSeleccionada: TipoIdentificacion;
+
+  public identificiones: Array<TipoIdentificacion> = [
+    { id: 'MEX1', name: 'Documento electoral mexicano emitido por el IFE' },
+    { id: 'MEX2', name: 'Documento electoral mexicano emitido por el INE' },
+    { id: 'PASS', name: 'Pasaporte' }
+  ];
  
 
   constructor(private fb: FormBuilder) {
-    this.vistaActiva = this.eVista.CapturaID;
+    this.vistaActiva = this.eVista.DatosOnboarding;
    }
 
   ngOnInit(): void {
@@ -27,8 +38,13 @@ export class OnboardingComponent implements OnInit {
     this.form = this.fb.group({
       nombre: ['', [Validators.required]],
       app: ['', [Validators.required]],
-      apm: ['', [Validators.required]]
+      apm: ['', [Validators.required]],
+      identi: ['',[Validators.required]]
     });
+  }
+
+  get EsIdentificacionValida() {
+    return this.form.get('identi').invalid && this.form.get('identi').touched;
   }
 
   get EsNombreValido() {
@@ -43,6 +59,7 @@ export class OnboardingComponent implements OnInit {
 
   Guardar() {
     if ( this.form.valid ) {
+      this.buscarIdentificacionSeleccionada();
       this.siguienteVista();
       return;
     }
@@ -57,6 +74,14 @@ export class OnboardingComponent implements OnInit {
 
   vistaAnterior() {
     this.vistaActiva = this.vistaActiva - 1;
+  }
+
+  changeID(id: string) {
+    this.TipoID = id;    
+  }
+
+  buscarIdentificacionSeleccionada() {
+     this.identificacionSeleccionada =this.form.value.identi;
   }
 
 }
