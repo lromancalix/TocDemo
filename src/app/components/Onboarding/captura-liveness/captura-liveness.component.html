@@ -1,1 +1,37 @@
-<p>captura-liveness works!</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mx-auto" style="width: 18rem;">
+            <img *ngIf="!tokenExitoso" class="card-img-top" src="./../../../../assets/img/user.jpg" alt="Card image cap">
+            <img  *ngIf="tokenExitoso" class="card-img-top" [src]="imagenCapturada" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Captura tu selfie</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button 
+              (click)="capturar()"
+              class="btn btn-primary">Capturar imagen 
+                <i
+                class="fa fa-camera"
+                aria-hidden="true"></i>
+               </button>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Captura</h5>
+        </div>
+        <div class="modal-body" id="liveness">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <p>Espere un momento por favor...</p>
+        </div>
+      </div>
+    </div>
+  </div>

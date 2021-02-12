@@ -19,6 +19,15 @@ export class OnboardingComponent implements OnInit {
 
   identificacionSeleccionada: TipoIdentificacion;
 
+  tokenIdentificacion: string;
+  tokenSelfie: string;
+
+  botonActivo: boolean;
+  botonSelfieActivo: boolean;
+
+  tokenIdentificacionOK: boolean;
+  tokenSelfieOK: boolean;
+
   public identificiones: Array<TipoIdentificacion> = [
     { id: 'MEX1', name: 'Documento electoral mexicano emitido por el IFE' },
     { id: 'MEX2', name: 'Documento electoral mexicano emitido por el INE' },
@@ -28,6 +37,9 @@ export class OnboardingComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.vistaActiva = this.eVista.DatosOnboarding;
+    this.tokenIdentificacionOK = false;
+    this.tokenSelfieOK = false;
+    this.botonSelfieActivo = false;
    }
 
   ngOnInit(): void {
@@ -61,6 +73,7 @@ export class OnboardingComponent implements OnInit {
     if ( this.form.valid ) {
       this.buscarIdentificacionSeleccionada();
       this.siguienteVista();
+      this.mostrarBoton();
       return;
     }
 
@@ -69,7 +82,24 @@ export class OnboardingComponent implements OnInit {
 
   siguienteVista() {
     //if( this.vistaActiva === this.eVista.DatosOnboarding ) {}
+
     this.vistaActiva ++;
+   
+  }
+
+  mostrarBoton() {
+
+    if( this.vistaActiva === this.eVista.CapturaID  ) {
+      console.log('Mostrar boton');
+      
+      this.botonActivo = false;
+
+      if( this.tokenIdentificacionOK ) {
+        this.botonActivo = true;
+      }
+
+    }
+
   }
 
   vistaAnterior() {
@@ -82,6 +112,18 @@ export class OnboardingComponent implements OnInit {
 
   buscarIdentificacionSeleccionada() {
      this.identificacionSeleccionada =this.form.value.identi;
+  }
+
+  setTokenFrontal(token) {
+    this.tokenIdentificacion = token;
+    this.tokenIdentificacionOK = true;
+    this.mostrarBoton();
+  }
+
+  setTokenSelfie(token) {
+    this.tokenSelfie = token;
+    this.tokenSelfieOK = true;
+    this.botonActivo = true;
   }
 
 }

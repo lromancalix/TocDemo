@@ -106,14 +106,20 @@
                     class="captura-identificacion"
                     *ngIf="vistaActiva === eVista.CapturaID"
                   >
-                    <app-captura-identificacion [identificacion] ="identificacionSeleccionada"></app-captura-identificacion>
+                    <app-captura-identificacion 
+                    [identificacion] ="identificacionSeleccionada"
+                    (propagar) = "setTokenFrontal($event)"
+                    ></app-captura-identificacion>
                   </div>
+
+                  <p> Token frontal obtenido <strong>{{ tokenIdentificacion }}</strong> </p>
 
                   <div
                     class="captura-liveness"
                     *ngIf="vistaActiva === eVista.CapturaLiveness"
                   >
-                    <app-captura-liveness></app-captura-liveness>
+                    <app-captura-liveness 
+                    (selfieToken) ="setTokenSelfie($event)"></app-captura-liveness>
                   </div>
                 </div>
               </div>
@@ -123,20 +129,42 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button
-                      [disabled]="
-                        vistaActiva >= eVista.CapturaLiveness || form.invalid
-                      "
+                      [disabled]=" form.invalid    "
+                      *ngIf="vistaActiva == eVista.DatosOnboarding"
                       type="submit"
                       class="btn btn-info"
                     >
                       Siguiente
                       <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
+                    
+                    <!--Boton identificacion-->
+                    <button
+                      [disabled]=" !botonActivo "
+                      type="submit"
+                      *ngIf="vistaActiva == eVista.CapturaID"
+                      class="btn btn-info"
+                    >
+                      Siguiente 
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button><!--/Boton identificacion-->
+
+                    <!--Boton Selfie-->
+                    <button
+                    [disabled]=" !botonSelfieActivo "
+                    type="submit"
+                    *ngIf="vistaActiva == eVista.CapturaLiveness"
+                    class="btn btn-info"
+                  >
+                    Siguiente 
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                  </button>
+                    <!--Boton Selfie-->
                   </div>
                   <div class="col-md-12">
                     <button
                       class="btn btn-link"
-                      *ngIf="vistaActiva < eVista.CapturaID"
+                      *ngIf=" vistaActiva == eVista.CapturaID || vistaActiva == eVista.CapturaLiveness"
                       (click)="vistaAnterior()"
                     >
                       <i class="fa fa-arrow-left" aria-hidden="true"></i>

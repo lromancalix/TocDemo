@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { rejects } from 'assert';
 import { promise } from 'protractor';
 import { eStatusCaptura } from 'src/app/interfaces/enums';
@@ -15,6 +15,11 @@ export class CapturaIdentificacionComponent implements OnInit {
 
   tocToken: string;
   tokenFrontal: string;
+
+
+  @Output()
+  propagar = new EventEmitter<string>();
+
 
   statusFrontal: eStatusCaptura;
   statusTrasera: eStatusCaptura;
@@ -89,11 +94,13 @@ export class CapturaIdentificacionComponent implements OnInit {
     console.log("set frontal", exitoso);
     
     if( exitoso ) {
-      console.log('imagen frontal OK', image);
       
+      console.log('imagen frontal OK', image);      
       this.imagenFrontal = image;
       this.statusFrontal = this.statusCaptura.CapturaExitosa;
       this.tokenFrontal = token;
+      this.propagar.emit(token);
+
     } else {
       this.imagenFrontal = "";
       this.statusFrontal = this.statusCaptura.CarturaFallada;
