@@ -17,6 +17,10 @@ export class CapturaLivenessComponent implements OnInit {
   cargando: boolean;
   imagenCapturada: string;
   tokenExitoso = false;
+  selfieExitosa = false;
+
+  @Output()
+  propagarTokenSelfie = new EventEmitter<string>();
 
   constructor(private serviceToc: TocTokenService) { 
 
@@ -45,12 +49,15 @@ export class CapturaLivenessComponent implements OnInit {
 
        this.imagenCapturada  = image;
        this.tokenExitoso = true;
+       this.selfieExitosa = true;
+       this.propagarTokenSelfie.emit(token);
        $(".modal").hide();
 
       },
      failure: (error) => {
       
       this.tokenExitoso = false;
+      this.selfieExitosa = false;
 
        $(".modal").hide();
        console.log('Error => ', error);

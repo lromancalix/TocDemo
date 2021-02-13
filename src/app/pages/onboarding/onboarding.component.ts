@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TipoIdentificacion } from 'src/app/interfaces/clases';
 import { eVistaOnboarding } from '../../interfaces/enums';
+import { DatosOnboarding } from '../../interfaces/clases';
 
 @Component({
   selector: 'app-onboarding',
@@ -27,6 +28,12 @@ export class OnboardingComponent implements OnInit {
 
   tokenIdentificacionOK: boolean;
   tokenSelfieOK: boolean;
+
+  ladoFrontal = 1;
+  ladoReverso = 2;
+
+  datosOnboarding = new DatosOnboarding();
+
 
   public identificiones: Array<TipoIdentificacion> = [
     { id: 'MEX1', name: 'Documento electoral mexicano emitido por el IFE' },
@@ -55,6 +62,7 @@ export class OnboardingComponent implements OnInit {
     });
   }
 
+
   get EsIdentificacionValida() {
     return this.form.get('identi').invalid && this.form.get('identi').touched;
   }
@@ -70,6 +78,11 @@ export class OnboardingComponent implements OnInit {
   }
 
   Guardar() {
+
+    console.clear();
+    console.log('cambiando pantalla');
+    
+
     if ( this.form.valid ) {
       this.buscarIdentificacionSeleccionada();
       this.siguienteVista();
@@ -90,15 +103,19 @@ export class OnboardingComponent implements OnInit {
   mostrarBoton() {
 
     if( this.vistaActiva === this.eVista.CapturaID  ) {
-      console.log('Mostrar boton');
+      console.log("validación exitosa");
       
       this.botonActivo = false;
 
-      if( this.tokenIdentificacionOK ) {
+      if( this.datosOnboarding.identificacionFrontal.capturaExitosa ) {
+        console.log("activando boton");
+        
         this.botonActivo = true;
       }
 
     }
+
+    
 
   }
 
@@ -115,8 +132,11 @@ export class OnboardingComponent implements OnInit {
   }
 
   setTokenFrontal(token) {
-    this.tokenIdentificacion = token;
+    console.log("settoken frontal=>> propagando token frontal");
+    
     this.tokenIdentificacionOK = true;
+    this.datosOnboarding.identificacionFrontal.tokenIdentificacion = token;
+    this.datosOnboarding.identificacionFrontal.capturaExitosa = true;
     this.mostrarBoton();
   }
 
@@ -124,6 +144,10 @@ export class OnboardingComponent implements OnInit {
     this.tokenSelfie = token;
     this.tokenSelfieOK = true;
     this.botonActivo = true;
+    this.datosOnboarding.tokenSelfie = token;
+    this.mostrarBoton();
   }
+
+
 
 }

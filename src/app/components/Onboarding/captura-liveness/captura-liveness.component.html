@@ -5,10 +5,15 @@
             <img *ngIf="!tokenExitoso" class="card-img-top" src="./../../../../assets/img/user.jpg" alt="Card image cap">
             <img  *ngIf="tokenExitoso" class="card-img-top" [src]="imagenCapturada" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">Captura tu selfie</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h3 class="card-title">Captura tu selfie</h3>
+              <h5 
+              *ngIf="selfieExitosa"
+              class="card-title text-success animate__animated animate__fadeInDown">
+              Captura éxitosa
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+            </h5>
               <button 
-              (click)="capturar()"
+              (click)="capturar(); $event.preventDefault()"
               class="btn btn-primary">Capturar imagen 
                 <i
                 class="fa fa-camera"
@@ -35,3 +40,6 @@
       </div>
     </div>
   </div>
+
+
+  

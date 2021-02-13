@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mx-auto" style="width: 18rem">
+      <img
+        id="img-frontal"
+        *ngIf="!tokenFrontalExitoso"
+        class="card-img-top"
+        src="./../../../../assets/img/user.jpg"
+        alt="Card image cap"
+      />
+      <img
+        *ngIf="tokenFrontal"
+        class="card-img-top"
+        [src]="imagenFrontal"
+        alt="Card image cap"
+      />
+
+      <div class="card-body">
+
+        <h3>Frontal {{ statusFrontal }}</h3>
+        <h5 *ngIf="tokenFrontalExitoso" class="card-title text-success">
+          Captura éxitosa
+          <i
+            class="fa fa-check-circle-o "
+            aria-hidden="true"
+          ></i>
+        </h5>
+
+        <button
+          type="button"
+          (click)="capturarID('front'); $event.preventDefault()"
+          
+          class="btn btn-primary"
+          style="color: white"
+        >
+          Capturar
+
+          <i
+            class="fa fa-camera"
+            *ngIf="statusFrontal == statusCaptura.SinCapturar"
+            aria-hidden="true"
+          ></i>
+          <!-- <i
+            class="fa fa-check-circle-o text-success"
+            *ngIf="statusFrontal == statusCaptura.CapturaExitosa"
+            aria-hidden="true"
+          ></i> -->
+
+          <i
+            class="fa fa-times text-danger"
+            *ngIf="statusFrontal == statusCaptura.CarturaFallada"
+            aria-hidden="true"
+          ></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card mx-auto" style="width: 18rem">
+      <img
+        *ngIf="!tokenReversoExitoso"
+        class="card-img-top"
+        src="./../../../../assets/img/user.jpg"
+        alt="Card image cap"
+      />
+      <img
+        *ngIf="tokenReversoExitoso"
+        class="card-img-top"
+        [src]="imagenTrasera"
+        alt="Card image cap"
+      />
+
+      <div class="card-body">
+        <h3 class="card-title">Reverso</h3>
+
+        <h5 *ngIf="tokenReversoExitoso" class="card-title text-success">
+            Captura éxitosa
+            <i
+              class="fa fa-check-circle-o "
+              aria-hidden="true"
+            ></i>
+          </h5>
+
+        <button
+          (click)="capturarID('back'); $event.preventDefault()"
+          target="_blank"
+          class="btn btn-primary"
+          style="color: white"
+        >
+          Capturar imagen
+          <i class="fa fa-camera" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<div class="modal" tabindex="-1" id="modalID">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Captura</h5>
+      </div>
+      <div class="modal-body" id="conten-identificacion">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <p>Espere un momento por favor...</p>
+      </div>
+    </div>
+  </div>
+</div>

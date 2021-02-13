@@ -79,10 +79,13 @@
                         /> -->
 
                         <div>
-                          <select 
+                          <select
                             class="fadeIn second"
-                            formControlName="identi">
-                            <option value="">Selecciona una identificación</option>
+                            formControlName="identi"
+                          >
+                            <option value="">
+                              Selecciona una identificación
+                            </option>
                             <option
                               *ngFor="let item of identificiones"
                               [ngValue]="item"
@@ -93,7 +96,9 @@
 
                           <div *ngIf="EsIdentificacionValida">
                             <p class="animate__animated animate__fadeInDown">
-                              <small>Se debe seleccionar una identificación*</small>
+                              <small
+                                >Se debe seleccionar una identificación*</small
+                              >
                             </p>
                           </div>
                         </div>
@@ -106,20 +111,48 @@
                     class="captura-identificacion"
                     *ngIf="vistaActiva === eVista.CapturaID"
                   >
-                    <app-captura-identificacion 
+                    <!-- <app-identificacion
+                  [identificacion] ="identificacionSeleccionada"
+                  (propagar) = "setTokenFrontal($event)"
+                  ></app-identificacion> -->
+                    <h5>{{ identificacionSeleccionada.name }}</h5>
+
+                    <div class="row">
+                      <div class="col col-md-6">
+                        <app-captura-identi
+                          [identificacion]="identificacionSeleccionada"
+                          [lado]="ladoFrontal"
+                          (propagar)="setTokenFrontal($event)"
+                        ></app-captura-identi>
+                      </div>
+
+                      <div class="col col-md-6">
+                        <app-captura-identi
+                          [identificacion]="identificacionSeleccionada"
+                          [lado]="ladoReverso"
+                        ></app-captura-identi>
+                      </div>
+                    </div>
+
+                    <!-- <app-captura-identificacion 
                     [identificacion] ="identificacionSeleccionada"
                     (propagar) = "setTokenFrontal($event)"
-                    ></app-captura-identificacion>
+                    ></app-captura-identificacion> -->
                   </div>
 
-                  <p> Token frontal obtenido <strong>{{ tokenIdentificacion }}</strong> </p>
+                  <!-- <p>
+                    Token frontal obtenido
+                    <strong>{{ tokenIdentificacion }}</strong>
+                  </p> -->
 
                   <div
                     class="captura-liveness"
                     *ngIf="vistaActiva === eVista.CapturaLiveness"
                   >
-                    <app-captura-liveness 
-                    (selfieToken) ="setTokenSelfie($event)"></app-captura-liveness>
+                    <app-captura-liveness
+                      (selfieToken)="setTokenSelfie($event)"
+                      (propagarTokenSelfie)="setTokenSelfie($event)"
+                    ></app-captura-liveness>
                   </div>
                 </div>
               </div>
@@ -129,7 +162,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button
-                      [disabled]=" form.invalid    "
+                      [disabled]="form.invalid"
                       *ngIf="vistaActiva == eVista.DatosOnboarding"
                       type="submit"
                       class="btn btn-info"
@@ -137,34 +170,40 @@
                       Siguiente
                       <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
-                    
+
                     <!--Boton identificacion-->
                     <button
-                      [disabled]=" !botonActivo "
+                      [disabled]="!botonActivo"
                       type="submit"
                       *ngIf="vistaActiva == eVista.CapturaID"
                       class="btn btn-info"
                     >
-                      Siguiente 
-                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                    </button><!--/Boton identificacion-->
+                      Siguiente
+                      <i
+                        class="fa fa-arrow-right"
+                        aria-hidden="true"
+                      ></i></button
+                    ><!--/Boton identificacion-->
 
                     <!--Boton Selfie-->
                     <button
-                    [disabled]=" !botonSelfieActivo "
-                    type="submit"
-                    *ngIf="vistaActiva == eVista.CapturaLiveness"
-                    class="btn btn-info"
-                  >
-                    Siguiente 
-                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  </button>
+                      [disabled]="!botonSelfieActivo"
+                      type="submit"
+                      *ngIf="vistaActiva == eVista.CapturaLiveness"
+                      class="btn btn-info"
+                    >
+                      Siguiente
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
                     <!--Boton Selfie-->
                   </div>
                   <div class="col-md-12">
                     <button
                       class="btn btn-link"
-                      *ngIf=" vistaActiva == eVista.CapturaID || vistaActiva == eVista.CapturaLiveness"
+                      *ngIf="
+                        vistaActiva == eVista.CapturaID ||
+                        vistaActiva == eVista.CapturaLiveness
+                      "
                       (click)="vistaAnterior()"
                     >
                       <i class="fa fa-arrow-left" aria-hidden="true"></i>

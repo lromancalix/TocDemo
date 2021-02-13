@@ -1,0 +1,71 @@
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mx-auto" style="width: 18rem">
+      <img
+      *ngIf="!tokenFrontalExitoso"
+        id="img-frontal"
+        class="card-img-top"
+        src="./../../../../assets/img/user.jpg"
+        alt="Card image cap"
+      />
+      
+      <img
+      *ngIf="tokenFrontalExitoso"
+        id="img-frontal"
+        class="card-img-top"
+        [src]="imagenFrontal"
+        alt="Card image cap"
+      />
+
+    </div>
+    <div class="card-body">
+      <h3 *ngIf="lado == 1">Frontal</h3>
+      <h3 *ngIf="lado == 2">Reverso</h3>
+      <h5 
+        *ngIf="tokenFrontalExitoso"
+        class="card-title text-success animate__animated animate__fadeInDown">
+        Captura éxitosa
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+      </h5>
+
+      <button 
+        (click)="capturaImagen(); $event.preventDefault()"
+        class="btn btn-primary">
+          Capturar
+
+          <i class="fa fa-camera" aria-hidden="true"></i>
+      </button>
+      <button 
+        style="display: none;"
+        id="btn-confirmar"
+        (click)="$event.preventDefault()"
+        class="btn btn-primary">
+          OK
+      </button>
+
+      
+    </div>
+
+    <!-- <div class="card-footer">TFE => {{tokenFrontalExitoso}}</div> -->
+  </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<div class="modal" tabindex="-1" id="modalIDenti">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Captura</h5>
+      </div>
+      <div class="modal-body" id="conten-identificacion">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <p>Espere un momento por favor...</p>
+      </div>
+    </div>
+  </div>
+</div>

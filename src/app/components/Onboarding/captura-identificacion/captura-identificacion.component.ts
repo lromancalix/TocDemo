@@ -86,7 +86,6 @@ export class CapturaIdentificacionComponent implements OnInit {
       console.log('NO, Token NO Exitoso entró');
     }
 
-  
   }
 
   setDatosImagenFrontal(token: string, image: string, exitoso: boolean) {
@@ -107,6 +106,7 @@ export class CapturaIdentificacionComponent implements OnInit {
       this.tokenFrontal = "";
     }
   }
+  
   setDatosImagenTrasera(token: string, image: string, exitoso: boolean) {
     console.log("set trasera", exitoso);
     
