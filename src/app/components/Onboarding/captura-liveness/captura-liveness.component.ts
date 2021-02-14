@@ -26,6 +26,9 @@ export class CapturaLivenessComponent implements OnInit {
 
   @Output()
   propagarTokenSelfie = new EventEmitter<string>();
+  
+  @Output()
+  propagarSelfie = new EventEmitter<string>();
 
   constructor(private serviceToc: TocTokenService) { 
     this.statusCaptura = this.eStatusCaptura.SinCapturar;
@@ -57,8 +60,10 @@ export class CapturaLivenessComponent implements OnInit {
        this.selfieExitosa = true;
        this.statusCaptura = this.eStatusCaptura.CapturaExitosa
        this.propagarTokenSelfie.emit(token);
+       this.propagarSelfie.emit(image);
        $(".modal").hide();
        this.confirmar();
+       
       },
      failure: (error) => {
       

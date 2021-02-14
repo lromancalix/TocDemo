@@ -10,11 +10,12 @@ import { CapturaIdentificacionComponent } from './Onboarding/captura-identificac
 import { IdentificacionComponent } from './identificacion/identificacion.component';
 import { CapturaIdentiComponent } from './Onboarding/captura-identi/captura-identi.component';
 import { CapturaSelfieLivenessComponent } from './captura/captura-selfie-liveness/captura-selfie-liveness.component';
+import { ConfirmaDatosComponent } from './Onboarding/confirma-datos/confirma-datos.component';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, FooteroneComponent, LivenesscamComponent, DatosPersonalesComponent, CapturaIdentificacionComponent, CapturaLivenessComponent, IdentificacionComponent, CapturaIdentiComponent, CapturaSelfieLivenessComponent],
+  declarations: [NavbarComponent, FooteroneComponent, LivenesscamComponent, DatosPersonalesComponent, CapturaIdentificacionComponent, CapturaLivenessComponent, IdentificacionComponent, CapturaIdentiComponent, CapturaSelfieLivenessComponent, ConfirmaDatosComponent],
   exports: [
     NavbarComponent,
     FooteroneComponent,
@@ -23,7 +24,8 @@ import { CapturaSelfieLivenessComponent } from './captura/captura-selfie-livenes
     CapturaLivenessComponent,
     IdentificacionComponent,
     CapturaIdentiComponent,
-    CapturaSelfieLivenessComponent
+    CapturaSelfieLivenessComponent,
+    ConfirmaDatosComponent
   ],
   imports: [
     CommonModule,

@@ -23,12 +23,12 @@ export class TocTokenService {
   constructor(private http: HttpClient) {  }
 
   getTocTokenPromise() {
-    console.log('Inicia promesa'); 
+    
     return new Promise( ( resolve, reject ) => {
      
       this.getToken()
       .subscribe( (response: any) => {
-        console.log("CLX", response);
+       
         
         this.tokenGenerado = response;
         resolve();

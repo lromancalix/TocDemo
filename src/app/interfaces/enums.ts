@@ -10,7 +10,8 @@ export enum Role {
 export enum eVistaOnboarding {
     DatosOnboarding = 1,
     CapturaID = 2,
-    CapturaLiveness = 3
+    CapturaLiveness = 3,
+    ConfirmaDatos = 4
 }
 
 export enum eStatusCaptura {

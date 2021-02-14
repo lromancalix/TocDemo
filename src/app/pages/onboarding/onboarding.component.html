@@ -111,10 +111,7 @@
                     class="captura-identificacion"
                     *ngIf="vistaActiva === eVista.CapturaID"
                   >
-                    <!-- <app-identificacion
-                  [identificacion] ="identificacionSeleccionada"
-                  (propagar) = "setTokenFrontal($event)"
-                  ></app-identificacion> -->
+                   
                     <h5>{{ identificacionSeleccionada.name }}</h5>
 
                     <div class="row">
@@ -125,25 +122,8 @@
                           (propagar)="setTokenFrontal($event)"
                         ></app-captura-identi>
                       </div>
-
-                      <!-- <div class="col col-md-6">
-                        <app-captura-identi
-                          [identificacion]="identificacionSeleccionada"
-                          [lado]="ladoReverso"
-                        ></app-captura-identi>
-                      </div> -->
                     </div>
-
-                    <!-- <app-captura-identificacion 
-                    [identificacion] ="identificacionSeleccionada"
-                    (propagar) = "setTokenFrontal($event)"
-                    ></app-captura-identificacion> -->
                   </div>
-
-                  <!-- <p>
-                    Token frontal obtenido
-                    <strong>{{ tokenIdentificacion }}</strong>
-                  </p> -->
 
                   <div
                     class="captura-liveness"
@@ -152,8 +132,17 @@
                     <app-captura-liveness
                       (selfieToken)="setTokenSelfie($event)"
                       (propagarTokenSelfie)="setTokenSelfie($event)"
+                      (propagarSelfie)="setSelfie($event)"
                     ></app-captura-liveness>
                   </div>
+
+                  <!--Confirmar datos-->
+                  <div *ngIf="vistaActiva === eVista.ConfirmaDatos">
+                    <app-confirma-datos  
+                    [datosCapturados]="datosOnboarding"></app-confirma-datos>
+                  </div>
+                  <!--/Confirmar datos-->
+
                 </div>
               </div>
 
@@ -195,7 +184,7 @@
                       Siguiente
                       <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
-                    <!--Boton Selfie-->
+                    <!--/Boton Selfie-->
                   </div>
                   <div class="col-md-12">
                     <button

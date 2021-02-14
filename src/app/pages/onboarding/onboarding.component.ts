@@ -32,7 +32,7 @@ export class OnboardingComponent implements OnInit {
   ladoFrontal = 1;
   ladoReverso = 2;
 
-  datosOnboarding = new DatosOnboarding();
+  datosOnboarding:  DatosOnboarding;
 
 
   public identificiones: Array<TipoIdentificacion> = [
@@ -43,10 +43,11 @@ export class OnboardingComponent implements OnInit {
  
 
   constructor(private fb: FormBuilder) {
-    this.vistaActiva = this.eVista.CapturaLiveness;
+    this.vistaActiva = this.eVista.DatosOnboarding;
     this.tokenIdentificacionOK = false;
     this.tokenSelfieOK = false;
     this.botonSelfieActivo = false;
+    this.datosOnboarding = new DatosOnboarding();
    }
 
   ngOnInit(): void {
@@ -84,6 +85,9 @@ export class OnboardingComponent implements OnInit {
     
 
     if ( this.form.valid ) {
+      this.datosOnboarding.nombre = this.form.get('nombre').value;
+      this.datosOnboarding.app = this.form.get('app').value;
+      this.datosOnboarding.apm = this.form.get('apm').value;
       this.buscarIdentificacionSeleccionada();
       this.siguienteVista();
       this.mostrarBoton();
@@ -95,7 +99,8 @@ export class OnboardingComponent implements OnInit {
 
   siguienteVista() {
     //if( this.vistaActiva === this.eVista.DatosOnboarding ) {}
-
+    console.log("siguiente vista");
+    
     this.vistaActiva ++;
    
   }
@@ -129,11 +134,10 @@ export class OnboardingComponent implements OnInit {
 
   buscarIdentificacionSeleccionada() {
      this.identificacionSeleccionada =this.form.value.identi;
+     this.datosOnboarding.identificacionFrontal.tipoIdentificacion = this.identificacionSeleccionada;
   }
 
   setTokenFrontal(token) {
-    console.log("settoken frontal=>> propagando token frontal");
-    
     this.tokenIdentificacionOK = true;
     this.datosOnboarding.identificacionFrontal.token = token;
     this.datosOnboarding.identificacionFrontal.capturaExitosa = true;
@@ -141,12 +145,17 @@ export class OnboardingComponent implements OnInit {
   }
 
   setTokenSelfie(token) {
+    
     this.tokenSelfie = token;
     this.tokenSelfieOK = true;
     this.botonActivo = true;
     this.datosOnboarding.selfie.token = token;
     this.datosOnboarding.selfie.capturaExitosa = true;
-    this.mostrarBoton();
+    //this.mostrarBoton();
+  }
+
+  setSelfie(imagen) {
+    this.datosOnboarding.selfie.imagen = imagen;
   }
 
 

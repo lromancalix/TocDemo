@@ -21,6 +21,7 @@ export class CapturaTOC {
 export class DatosOnboarding {
    nombre: string;
    app: string;
+   apm: string;
    correo: string;
    tipoIdentificacion: TipoIdentificacion;
 
@@ -30,6 +31,7 @@ export class DatosOnboarding {
 
    constructor() {
        this.app ="";
+       this.apm ="";
        this.correo ="";
        this.nombre ="";
        this.tipoIdentificacion = new TipoIdentificacion();
