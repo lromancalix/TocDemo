@@ -56,6 +56,7 @@
                           </p>
                         </div>
                       </div>
+                      
                       <div>
                         <input
                           type="text"
@@ -70,14 +71,23 @@
                           </p>
                         </div>
                       </div>
+
                       <div>
-                        <!-- <input
+                        <input
                           type="text"
                           class="fadeIn second"
                           name="App"
-                          placeholder="identificación"
-                        /> -->
+                          formControlName="correo"
+                          placeholder="correo@correo.com"
+                        />
+                        <div *ngIf="EsCorreoValido">
+                          <p class="animate__animated animate__fadeInDown">
+                            <small>El correo es requerido *</small>
+                          </p>
+                        </div>
+                      </div>
 
+                      <div>
                         <div>
                           <select
                             class="fadeIn second"
@@ -185,15 +195,26 @@
                       <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
                     <!--/Boton Selfie-->
+                    <!--Boton confirmar-->
+                    <button
+                      type="submit"
+                      *ngIf="vistaActiva == eVista.ConfirmaDatos"
+                      class="btn fa-floppy-o"
+                    >
+                      Guardar
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                    <!--/Boton Confirmar-->
                   </div>
                   <div class="col-md-12">
                     <button
                       class="btn btn-link"
                       *ngIf="
                         vistaActiva == eVista.CapturaID ||
-                        vistaActiva == eVista.CapturaLiveness
+                        vistaActiva == eVista.CapturaLiveness ||
+                        vistaActiva == eVista.ConfirmaDatos
                       "
-                      (click)="vistaAnterior()"
+                      (click)="vistaAnterior(); $event.preventDefault()"
                     >
                       <i class="fa fa-arrow-left" aria-hidden="true"></i>
                       Regresar

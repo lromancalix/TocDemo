@@ -12,7 +12,6 @@ export class ConfirmaDatosComponent implements OnInit {
   datosCapturados: DatosOnboarding;
 
   constructor() { 
-    console.log("datos capturados => ", this.datosCapturados);    
   }
 
   ngOnInit(): void {

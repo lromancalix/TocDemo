@@ -59,6 +59,7 @@ export class OnboardingComponent implements OnInit {
       nombre: ['', [Validators.required]],
       app: ['', [Validators.required]],
       apm: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
       identi: ['',[Validators.required]]
     });
   }
@@ -77,17 +78,17 @@ export class OnboardingComponent implements OnInit {
   get EsApmValido() {
     return this.form.get('apm').invalid && this.form.get('apm').touched;
   }
+  get EsCorreoValido() {
+    return this.form.get('correo').invalid && this.form.get('apm').touched;
+  }
 
   Guardar() {
-
-    console.clear();
-    console.log('cambiando pantalla');
-    
 
     if ( this.form.valid ) {
       this.datosOnboarding.nombre = this.form.get('nombre').value;
       this.datosOnboarding.app = this.form.get('app').value;
       this.datosOnboarding.apm = this.form.get('apm').value;
+      this.datosOnboarding.correo = this.form.get('correo').value;
       this.buscarIdentificacionSeleccionada();
       this.siguienteVista();
       this.mostrarBoton();
@@ -99,7 +100,6 @@ export class OnboardingComponent implements OnInit {
 
   siguienteVista() {
     //if( this.vistaActiva === this.eVista.DatosOnboarding ) {}
-    console.log("siguiente vista");
     
     this.vistaActiva ++;
    
@@ -113,14 +113,11 @@ export class OnboardingComponent implements OnInit {
       this.botonActivo = false;
 
       if( this.datosOnboarding.identificacionFrontal.capturaExitosa ) {
-        console.log("activando boton");
         
         this.botonActivo = true;
       }
 
     }
-
-    
 
   }
 
