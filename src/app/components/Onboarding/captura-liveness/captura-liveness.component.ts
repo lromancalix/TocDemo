@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { TocTokenService } from '../../../services/Toc/toc-token.service';
+import { eStatusCaptura } from '../../../interfaces/enums';
 declare var $:any;
 
 @Component({
@@ -19,11 +20,15 @@ export class CapturaLivenessComponent implements OnInit {
   tokenExitoso = false;
   selfieExitosa = false;
 
+  eStatusCaptura= eStatusCaptura;
+  statusCaptura: eStatusCaptura;
+
+
   @Output()
   propagarTokenSelfie = new EventEmitter<string>();
 
   constructor(private serviceToc: TocTokenService) { 
-
+    this.statusCaptura = this.eStatusCaptura.SinCapturar;
   }
 
   ngOnInit(): void {
@@ -50,20 +55,22 @@ export class CapturaLivenessComponent implements OnInit {
        this.imagenCapturada  = image;
        this.tokenExitoso = true;
        this.selfieExitosa = true;
+       this.statusCaptura = this.eStatusCaptura.CapturaExitosa
        this.propagarTokenSelfie.emit(token);
        $(".modal").hide();
-
+       this.confirmar();
       },
      failure: (error) => {
       
       this.tokenExitoso = false;
       this.selfieExitosa = false;
-
-       $(".modal").hide();
-       console.log('Error => ', error);
-
-      },
+      this.statusCaptura = this.eStatusCaptura.CarturaFallada;
+      this.confirmar();
+      $(".modal").hide();
+     },
    });
  }
+
+  confirmar() { $("#btn-confirmar").click(); }
 
 }

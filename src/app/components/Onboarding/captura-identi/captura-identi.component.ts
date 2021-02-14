@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TipoIdentificacion } from '../../../interfaces/clases';
 import { TocTokenService } from '../../../services/Toc/toc-token.service';
+import { eStatusCaptura } from '../../../interfaces/enums';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,9 @@ export class CapturaIdentiComponent implements OnInit {
   imagenFrontal= "";
   tokenFrontalExitoso = false;
 
+  eStatusCaptura= eStatusCaptura;
+  statusCaptura: eStatusCaptura;
+
   cont = "";
 
   @Input() 
@@ -25,7 +29,9 @@ export class CapturaIdentiComponent implements OnInit {
   @Output()
   propagar = new EventEmitter<string>();
 
-  constructor(private serviceToc: TocTokenService) { }
+  constructor(private serviceToc: TocTokenService) {
+    this.statusCaptura = this.eStatusCaptura.SinCapturar;
+   }
 
   ngOnInit(): void {
   }
@@ -55,28 +61,31 @@ export class CapturaIdentiComponent implements OnInit {
       document_side: lado,
       http: true,
       callback:  (token, image) => {
-        $("#modalIDenti").hide();
-
+        
         this.tokenFrontal = token;
         this.tokenFrontalExitoso = true;
+        this.statusCaptura = this.eStatusCaptura.CapturaExitosa
         this.asignarImagen(lado,image, true);
+        $("#modalIDenti").hide();
         //this.ValidarToken(token, lado, image, true);
       },
       failure:  (error) => {
+        this.tokenFrontal = "";
+        this.tokenFrontalExitoso = false;
+        this.statusCaptura = this.eStatusCaptura.CarturaFallada;
         $("#modalIDenti").hide();
-        //this.ValidarToken(error, lado, "", false);
+        $("#btn-confirmar").click();
       },
     });
 
   }
 
   asignarImagen(lado: string, imagen:string ,tokenExitoso: boolean) {
-    console.log("asignando imagen");
     
     this.imagenFrontal = imagen;
     this.propagar.emit(this.tokenFrontal);
     $("#btn-confirmar").click();
-    console.log("asignando imagen =>", this.tokenFrontalExitoso);
+
   }
 
 }

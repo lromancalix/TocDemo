@@ -43,7 +43,7 @@ export class OnboardingComponent implements OnInit {
  
 
   constructor(private fb: FormBuilder) {
-    this.vistaActiva = this.eVista.DatosOnboarding;
+    this.vistaActiva = this.eVista.CapturaLiveness;
     this.tokenIdentificacionOK = false;
     this.tokenSelfieOK = false;
     this.botonSelfieActivo = false;
@@ -135,7 +135,7 @@ export class OnboardingComponent implements OnInit {
     console.log("settoken frontal=>> propagando token frontal");
     
     this.tokenIdentificacionOK = true;
-    this.datosOnboarding.identificacionFrontal.tokenIdentificacion = token;
+    this.datosOnboarding.identificacionFrontal.token = token;
     this.datosOnboarding.identificacionFrontal.capturaExitosa = true;
     this.mostrarBoton();
   }
@@ -144,7 +144,8 @@ export class OnboardingComponent implements OnInit {
     this.tokenSelfie = token;
     this.tokenSelfieOK = true;
     this.botonActivo = true;
-    this.datosOnboarding.tokenSelfie = token;
+    this.datosOnboarding.selfie.token = token;
+    this.datosOnboarding.selfie.capturaExitosa = true;
     this.mostrarBoton();
   }
 

@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
 
 
   Capturar() {
+    console.log("entrando");
     
     if ( this.formLogin.valid ) {
       this.cargando = true;
@@ -70,9 +71,9 @@ export class LoginComponent implements OnInit {
         $("#link-login").click();
       },
       failure: function (error) {
-        alert( error);
+        //alert( error);
         $(".modal").hide();
-        alert("Usuario Incorrecto!");
+        //alert("Usuario Incorrecto!");
       },
     });
   }

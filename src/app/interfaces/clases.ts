@@ -3,16 +3,16 @@ export class TipoIdentificacion {
     name: string;
 }
 
-export class IdentificacionCaptura {
+export class CapturaTOC {
 
-    tipoIdentificacion: TipoIdentificacion;
-    tokenIdentificacion: string;
+    tipoIdentificacion: TipoIdentificacion;// en caso de ser identificacion
+    token: string;
     capturaExitosa: boolean;
     imagen: string;
     
     constructor() {
         this.tipoIdentificacion = null;
-        this.tokenIdentificacion = "";
+        this.token = "";
         this.capturaExitosa = false;
         this.imagen = "";
     }
@@ -23,21 +23,19 @@ export class DatosOnboarding {
    app: string;
    correo: string;
    tipoIdentificacion: TipoIdentificacion;
-   tokenSelfie: string;
-   imagenSelfie: string;
 
-   identificacionFrontal: IdentificacionCaptura;
-   identificacionReverso: IdentificacionCaptura;
+   selfie: CapturaTOC;
+   identificacionFrontal: CapturaTOC;
+   identificacionReverso: CapturaTOC;
 
    constructor() {
        this.app ="";
        this.correo ="";
-       this.imagenSelfie ="";
        this.nombre ="";
        this.tipoIdentificacion = new TipoIdentificacion();
-       this.identificacionFrontal = new IdentificacionCaptura();
-       this.identificacionReverso = new IdentificacionCaptura();
-       this.tokenSelfie ="";
+       this.identificacionFrontal = new CapturaTOC();
+       this.identificacionReverso = new CapturaTOC();
+       this.selfie = new CapturaTOC();
    }
 }
 

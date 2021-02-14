@@ -1,20 +1,22 @@
 
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="card mx-auto" style="width: 18rem">
+  <div class="col-md-12 mx-auto">
+    <div class="card " >
       <img
       *ngIf="!tokenFrontalExitoso"
         id="img-frontal"
-        class="card-img-top"
-        src="./../../../../assets/img/user.jpg"
+        class="card-img-top mx-auto"
+        style="width: 50%;"
+        src="./../../../../assets/img/identificacion.png"
         alt="Card image cap"
+
       />
       
       <img
       *ngIf="tokenFrontalExitoso"
         id="img-frontal"
-        class="card-img-top"
+        class="card-img-top mx-auto"
         [src]="imagenFrontal"
         alt="Card image cap"
       />
@@ -23,19 +25,34 @@
     <div class="card-body">
       <h3 *ngIf="lado == 1">Frontal</h3>
       <h3 *ngIf="lado == 2">Reverso</h3>
-      <h5 
+      <!-- <h5 
         *ngIf="tokenFrontalExitoso"
         class="card-title text-success animate__animated animate__fadeInDown">
         Captura éxitosa
         <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-      </h5>
+      </h5> -->
 
       <button 
         (click)="capturaImagen(); $event.preventDefault()"
         class="btn btn-primary">
           Capturar
 
-          <i class="fa fa-camera" aria-hidden="true"></i>
+          <i 
+          *ngIf="statusCaptura == eStatusCaptura.SinCapturar"
+            class="fa fa-camera" aria-hidden="true"></i>
+
+          <i
+          class="fa fa-check-circle-o text-success"
+          *ngIf="statusCaptura == eStatusCaptura.CapturaExitosa"
+          aria-hidden="true"
+        ></i>
+
+        <i
+          class="fa fa-times text-danger"
+          *ngIf="statusCaptura == eStatusCaptura.CarturaFallada"
+          aria-hidden="true"
+        ></i>
+
       </button>
       <button 
         style="display: none;"
