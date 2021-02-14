@@ -16,7 +16,7 @@
             <!-- Login Form -->
             <form
               [formGroup]="form"
-              (ngSubmit)="Guardar()"
+              (ngSubmit)="ValidaForm()"
               autocomplete="off"
               style="padding: 0% !important"
             >
@@ -197,12 +197,13 @@
                     <!--/Boton Selfie-->
                     <!--Boton confirmar-->
                     <button
-                      type="submit"
+                      type="button"
                       *ngIf="vistaActiva == eVista.ConfirmaDatos"
-                      class="btn fa-floppy-o"
+                      class="btn btn-info"
+                      (click) = "guardarOnboarding(); $even.preventDefault()"
                     >
                       Guardar
-                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i>
                     </button>
                     <!--/Boton Confirmar-->
                   </div>

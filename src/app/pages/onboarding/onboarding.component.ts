@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TipoIdentificacion } from 'src/app/interfaces/clases';
 import { eVistaOnboarding } from '../../interfaces/enums';
 import { DatosOnboarding } from '../../interfaces/clases';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-onboarding',
@@ -42,7 +44,7 @@ export class OnboardingComponent implements OnInit {
   ];
  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.vistaActiva = this.eVista.DatosOnboarding;
     this.tokenIdentificacionOK = false;
     this.tokenSelfieOK = false;
@@ -82,7 +84,7 @@ export class OnboardingComponent implements OnInit {
     return this.form.get('correo').invalid && this.form.get('apm').touched;
   }
 
-  Guardar() {
+  ValidaForm() {
 
     if ( this.form.valid ) {
       this.datosOnboarding.nombre = this.form.get('nombre').value;
@@ -94,15 +96,12 @@ export class OnboardingComponent implements OnInit {
       this.mostrarBoton();
       return;
     }
-
     
   }
 
   siguienteVista() {
     //if( this.vistaActiva === this.eVista.DatosOnboarding ) {}
-    
     this.vistaActiva ++;
-   
   }
 
   mostrarBoton() {
@@ -155,6 +154,20 @@ export class OnboardingComponent implements OnInit {
     this.datosOnboarding.selfie.imagen = imagen;
   }
 
+  guardarOnboarding(){
+   
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'success',
+      title: 'Datos Guardados',
+      showConfirmButton: false
+    });
 
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+      Swal.close();
+    }, 3000);
+
+  }
 
 }

@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
 
   Capturar() {
-    console.log("entrando");
     
     if ( this.formLogin.valid ) {
       this.cargando = true;
