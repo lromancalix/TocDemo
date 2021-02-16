@@ -50,12 +50,12 @@ export class TocTokenService {
   //Consumo de servicios
   private getToken(  ): Observable<string> {
     
-    let url =`${this.urlToc}`;
+    let url =`${environment.urlTocService}`;
 
     // Convert to JSON  
     var stringifiedData = JSON.stringify(this.myData);  
     
-    return this.http.post(url, this.myData)
+    return this.http.get(url)
     .pipe(
       map( (response: any) => {
         console.log(`calix=> ${response.status}`);
@@ -70,7 +70,7 @@ export class TocTokenService {
 
   private getIndetificacionVsSelfie(datos: IdVsSelfie): Observable<any> {
    // let url =`${this.urlIdVsSelfie}`;
-    let url =`${environment.urlTocService}`;
+    let url =`${ environment.urlTocService }`;
 
     // Convert to JSON  
     var stringifiedData = JSON.stringify(datos);  

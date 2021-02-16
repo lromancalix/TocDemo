@@ -1,6 +1,6 @@
 {
-    "/session-manager/*" : {
-    "target": "https://sandbox-api.7oc.cl",
+    "/api/*" : {
+    "target": "http://dtecnoweb.net/",
     "secure": false,
     "changeOrigin": true
     }

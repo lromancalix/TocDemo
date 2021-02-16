@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlTocService: "http://dtecnoweb.net/api/TOC"
+  urlTocService: "/api/TOC"
 };
 
 /*
