@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { IdVsSelfie } from '../../interfaces/clases';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class TocTokenService {
 
   private datos: DatosTocToken ;
   urlToc= "/session-manager/v1/session-id";
+  urlIdVsSelfie = "/v2/face-and-document";
   public tokenGenerado: string;
 
   // Object Data  
@@ -22,6 +25,7 @@ export class TocTokenService {
 
   constructor(private http: HttpClient) {  }
 
+  //Invocación de promesas
   getTocTokenPromise() {
     
     return new Promise( ( resolve, reject ) => {
@@ -38,15 +42,18 @@ export class TocTokenService {
     
   }
 
-  private getToken(  ): Observable<string> {
+  IdentificacionVsSelfiePromise() {
 
+  }
+
+
+  //Consumo de servicios
+  private getToken(  ): Observable<string> {
     
     let url =`${this.urlToc}`;
-    console.log("urlTOC: ", url);
 
     // Convert to JSON  
     var stringifiedData = JSON.stringify(this.myData);  
-    console.log("With Stringify :" , stringifiedData);  
     
     return this.http.post(url, this.myData)
     .pipe(
@@ -61,6 +68,20 @@ export class TocTokenService {
     );
   }
 
+  private getIndetificacionVsSelfie(datos: IdVsSelfie): Observable<any> {
+   // let url =`${this.urlIdVsSelfie}`;
+    let url =`${environment.urlTocService}`;
+
+    // Convert to JSON  
+    var stringifiedData = JSON.stringify(datos);  
+    
+    return this.http.get(url)
+    .pipe(
+      map( (response: any) => {
+          return response;
+      } ) 
+    );
+  }
 }
 
 

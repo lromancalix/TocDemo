@@ -43,3 +43,35 @@ export class DatosOnboarding {
 
 
 
+export class IdVsSelfie {
+
+    id_front: string;
+    id_back: string;
+    selfie: string;
+    apiKey: string;
+    documentType: string;
+
+    constructor() {
+        this.apiKey = "70488227ef50439d99a324219ea90a81";
+        this.documentType ="";
+        this.id_front = "";
+        this.id_back = "";
+        this.selfie = "";
+    }
+}
+
+export class Response_IdVsSelfie {
+
+    status: number;
+    biometric_result: number;
+    tok_token: string;
+    information: string;
+
+    constructor() {
+        this.status = 0;
+        this.biometric_result = 0;
+        this.tok_token = "";
+        this.information = "";
+    }
+}
+
