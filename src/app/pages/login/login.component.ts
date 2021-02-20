@@ -65,12 +65,14 @@ export class LoginComponent implements OnInit {
       locale: "es",
       session_id: sesion,
       http: true,
+      //alt_server: "https://prod-capture.tocws.com/",
+      //url_lbac: "https://prod-api.7oc.cl/auto-capture/data/v2",
       callback: function (token) {
         $(".modal").hide();
         $("#link-login").click();
       },
       failure: function (error) {
-        //alert( error);
+        alert( error);
         $(".modal").hide();
         //alert("Usuario Incorrecto!");
       },

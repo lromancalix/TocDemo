@@ -48,19 +48,25 @@ export class TocTokenService {
 
 
   //Consumo de servicios
-  private getToken(  ): Observable<string> {
+  private getToken(): Observable<string> {
     
+    //let url =`${ this.urlToc }`;
     let url =`${environment.urlTocService}`;
+    console.log("CLX => URL2 => ", url);
+    
 
     // Convert to JSON  
     var stringifiedData = JSON.stringify(this.myData);  
     
-    return this.http.get(url)
+    return this.http.get( url )
     .pipe(
       map( (response: any) => {
         console.log(`calix=> ${response.status}`);
+        console.log(`calix=> ${response.session_id}`);
 
         if( response.status == "200" ) {          
+          console.log("token generado correctamente.");
+          
           return response.session_id;
         }
         return `Intente de nuevo: ${response.status}`;
@@ -69,7 +75,7 @@ export class TocTokenService {
   }
 
   private getIndetificacionVsSelfie(datos: IdVsSelfie): Observable<any> {
-   // let url =`${this.urlIdVsSelfie}`;
+   //let url =`${this.urlIdVsSelfie}`;
     let url =`${ environment.urlTocService }`;
 
     // Convert to JSON  

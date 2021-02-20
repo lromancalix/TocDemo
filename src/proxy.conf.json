@@ -1,6 +1,6 @@
 {
     "/api/*" : {
-    "target": "http://dtecnoweb.net/",
+    "target": "http://dtecnoweb.net",
     "secure": false,
     "changeOrigin": true
     }

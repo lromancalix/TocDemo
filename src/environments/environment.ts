@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  urlTocService: "/api/TOC"
+  //urlTocService: "/api/TOC"
+  urlTocService: "http://dtecnoweb.net/api/TOC"
+  //urlTocService: "/session-manager/v1/session-id"
 };
 
 /*

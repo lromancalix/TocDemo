@@ -6,7 +6,7 @@
     <title>Toc 2</title>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
+    <!-- <link
       rel="stylesheet"
       href="./assets/style/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="./assets/style/font-awesome.min.css" />
     <link rel="stylesheet" href="./assets/style/animated.css" />
-    <link rel="stylesheet" href="./assets/style/hover.css" />
+    <link rel="stylesheet" href="./assets/style/hover.css" /> -->
   </head>
   <body>
     <h1>Hola mundos</h1>
@@ -29,16 +29,18 @@
       "
     ></div>
 
+    <input type="text" id="txt-token" />
+    <input type="button" id="btn" value="click me!" />
+
+
     <script
       src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
     ></script>
-    <script
+    <!-- <script
       src="./assets/js/popper.min.js"
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
 
     <script src="https://sandbox-web-plugins.s3.amazonaws.com/liveness/js/liveness.js"></script>
     <script src="https://sandbox-web-plugins.s3.amazonaws.com/autocapture/autocapture.js"></script>
@@ -48,37 +50,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtcadapter/6.2.1/adapter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/siema@1.5.1/dist/siema.min.js"></script> -->
-<!--
+
     <script>
       $(document).ready(function () {
-        // $("#liveness").liveness({
-        //   locale: "es",
-        //   session_id: "297cb5c657a4449e99d0bf2395de6a33",
-        //   http: true,
-        //   callback: function (token) {
-        //     alert(token);
-        //   },
-        //   failure: function (error) {
-        //     alert(error);
-        //   },
-        // });
 
-        $("#liveness").autocapture({
-          locale: "es",
-          session_id: "8e8e2a20fb9a40c0b0df26f16f39e3de",
-          document_type: "CHL2",
-          document_side: "front",
-          http: true,
-          callback: function (token, image) {
-            alert(token);
-          },
-          failure: function (error) {
-            alert(error);
-          },
+        $("#btn").click(function () {
+          
+          //alert("click");
+          // $("#liveness").liveness({
+          //   locale: "es",
+          //   session_id: $("#toctoken").value(),
+          //   http: true,
+          //   callback: function (token) {
+          //     alert(token);
+          //   },
+          //   failure: function (error) {
+          //     alert(error);
+          //   },
+          // });
+
+          $("#liveness").liveness({
+            locale: "es",
+            session_id: $("#txt-token").val(),
+            http: true,
+            callback: function (token) {
+              alert(token);
+            },
+            failure: function (error) {
+              alert(error);
+            },
+          });
+
+          //alert( $("#txt-token").val() );
+
+          //$("#toctoken").val()
+
+
         });
 
-
+        // $("#btn").click(function () {
+        //   $("#liveness").autocapture({
+        //     locale: "es",
+        //     session_id: $("#toctoken").value(),
+        //     document_type: "CHL2",
+        //     document_side: "front",
+        //     http: true,
+        //     callback: function (token, image) {
+        //       alert(token);
+        //     },
+        //     failure: function (error) {
+        //       alert(error);
+        //     },
+        //   });
+        // });
       });
-    </script>-->
+    </script>
   </body>
 </html>
