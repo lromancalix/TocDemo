@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { ValidacionesComponent } from './pages/validaciones/validaciones.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'validaciones',
     component: ValidacionesComponent
+  },
+  {
+    path: 'cliente',
+    component: ClienteComponent
   },
   {
     path: '**',

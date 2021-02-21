@@ -19,6 +19,8 @@ export class TocTokenService {
   urlIdVsSelfie = "/v2/face-and-document";
   public tokenGenerado: string;
 
+  public cliente: any;
+
   // Object Data  
   myData = {     
     apiKey: "70488227ef50439d99a324219ea90a81",
@@ -132,7 +134,7 @@ export class TocTokenService {
     return this.http.post(url, datos)
       .pipe(
         map( (response: any) => {
-          console.log("validacion =>", response);
+        this.cliente = response;
           return response;
         } )
       );
