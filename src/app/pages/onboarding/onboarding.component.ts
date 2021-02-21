@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TipoIdentificacion } from 'src/app/interfaces/clases';
 import { eVistaOnboarding } from '../../interfaces/enums';
-import { DatosOnboarding } from '../../interfaces/clases';
+import { DatosOnboarding, CapturaTOC, SaveOnboarding } from '../../interfaces/clases';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { TocTokenService } from '../../services/Toc/toc-token.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -35,6 +36,7 @@ export class OnboardingComponent implements OnInit {
   ladoReverso = 2;
 
   datosOnboarding:  DatosOnboarding;
+  datosSaved: SaveOnboarding;
 
 
   public identificiones: Array<TipoIdentificacion> = [
@@ -44,7 +46,11 @@ export class OnboardingComponent implements OnInit {
   ];
  
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+      private fb: FormBuilder, 
+      private router: Router, 
+      private http: TocTokenService
+      ) {
     this.vistaActiva = this.eVista.DatosOnboarding;
     this.tokenIdentificacionOK = false;
     this.tokenSelfieOK = false;
@@ -133,11 +139,25 @@ export class OnboardingComponent implements OnInit {
      this.datosOnboarding.identificacionFrontal.tipoIdentificacion = this.identificacionSeleccionada;
   }
 
-  setTokenFrontal(token) {
+  setTokenFrontal(captura: CapturaTOC) {
+    console.clear();
+    console.log("set token frontal", captura);
     this.tokenIdentificacionOK = true;
-    this.datosOnboarding.identificacionFrontal.token = token;
-    this.datosOnboarding.identificacionFrontal.capturaExitosa = true;
+    this.datosOnboarding.identificacionFrontal.token = captura.token;
+    this.datosOnboarding.identificacionFrontal.capturaExitosa = captura.capturaExitosa;
+    this.datosOnboarding.identificacionFrontal.imagen = captura.imagen
     this.mostrarBoton();
+  }
+
+
+  setTokenReverso(captura: CapturaTOC) {
+    console.log(captura);
+    
+    this.tokenIdentificacionOK = true;
+    this.datosOnboarding.identificacionReverso.token = captura.token;
+    this.datosOnboarding.identificacionReverso.capturaExitosa = captura.capturaExitosa;
+    this.datosOnboarding.identificacionReverso.imagen = captura.imagen
+    //this.mostrarBoton();
   }
 
   setTokenSelfie(token) {
@@ -158,16 +178,62 @@ export class OnboardingComponent implements OnInit {
    
     Swal.fire({
       allowOutsideClick: false,
-      icon: 'success',
-      title: 'Datos Guardados',
+      icon: 'info',
+      title: 'Espere un momento...',
       showConfirmButton: false
     });
 
-    setTimeout(() => {
-      this.router.navigate(['/home']);
+    Swal.showLoading();
+    
+    let datos = this.MappingOnboarding(this.datosOnboarding);
+
+    this.http.SaveOnboardingPromise(datos).then( (response: any) => {
+      console.log(response);
       Swal.close();
-    }, 3000);
+      this.MostrarMSG(response.Descripcion);
+    } );
 
   }
+
+  private MostrarMSG(texto: string) {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'success',
+      title: texto,
+      showConfirmButton: false,
+      timer: 2500
+    })
+    this.router.navigate(['/home']);
+  }
+
+  
+  private MappingOnboarding(datos: DatosOnboarding): SaveOnboarding {
+    let onboarding = new SaveOnboarding();
+    onboarding.nombre = datos.nombre;
+    onboarding.app = datos.app;
+    onboarding.apm = datos.apm;
+    onboarding.correo = datos.correo;
+    onboarding.claveIdentificacion = datos.identificacionFrontal.tipoIdentificacion.id;
+
+    onboarding.idTipoIdentificacion = datos.tipoIdentificacion.id;
+    onboarding.tokenFrontal = datos.identificacionFrontal.token;
+    onboarding.imagenFrontal = datos.identificacionFrontal.imagen;
+
+    onboarding.tokenReverso = datos.identificacionReverso.token;
+    onboarding.imagenReverso = datos.identificacionReverso.imagen;
+    onboarding.claveIdentificacion = datos.identificacionFrontal.tipoIdentificacion.id;
+    
+
+    onboarding.id = "0";
+    onboarding.imagenSeilfie = datos.selfie.imagen;
+    onboarding.tokenSelfie = datos.selfie.token;
+
+    onboarding.tokenIDEVsSelfie = "token selfie vs ife desde app";
+    this.datosSaved = onboarding;
+    return onboarding; 
+  }
+
+
+
 
 }

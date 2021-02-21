@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TipoIdentificacion } from '../../../interfaces/clases';
+import { TipoIdentificacion, CapturaTOC } from '../../../interfaces/clases';
 import { TocTokenService } from '../../../services/Toc/toc-token.service';
 import { eStatusCaptura } from '../../../interfaces/enums';
 declare var $: any;
@@ -27,10 +27,13 @@ export class CapturaIdentiComponent implements OnInit {
   @Input() 
   lado: number;
   @Output()
-  propagar = new EventEmitter<string>();
+  propagar = new EventEmitter<CapturaTOC>();
+
+  capturaTOC: CapturaTOC;
 
   constructor(private serviceToc: TocTokenService) {
     this.statusCaptura = this.eStatusCaptura.SinCapturar;
+    this.capturaTOC = new CapturaTOC();
    }
 
   ngOnInit(): void {
@@ -83,7 +86,11 @@ export class CapturaIdentiComponent implements OnInit {
   asignarImagen(lado: string, imagen:string ,tokenExitoso: boolean) {
     
     this.imagenFrontal = imagen;
-    this.propagar.emit(this.tokenFrontal);
+    this.capturaTOC.capturaExitosa = true;
+    this.capturaTOC.imagen = imagen;
+    this.capturaTOC.tipoIdentificacion =  this.identificacion;
+    this.capturaTOC.token = this.tokenFrontal;
+    this.propagar.emit(this.capturaTOC);
     $("#btn-confirmar").click();
 
   }

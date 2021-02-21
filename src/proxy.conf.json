@@ -1,7 +1,17 @@
+// {
+//     "/api/*" : {
+//     "target": "http://dtecnoweb.net",
+//     "secure": false,
+//     "changeOrigin": true
+//     }
+// }
+
+
 {
-    "/api/*" : {
-    "target": "http://dtecnoweb.net",
+    "/Notaria.SERVICE/*" : {
+    "target": " http://localhost",
     "secure": false,
+    "logLevel": "debug",
     "changeOrigin": true
     }
 }

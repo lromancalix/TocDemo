@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   //urlTocService: "/api/TOC"
-  urlTocService: "http://dtecnoweb.net/api/TOC"
-  //urlTocService: "/session-manager/v1/session-id"
+  urlTocService: "http://localhost/Notaria.SERVICE/toc_service/get_token",
+  urlOnboarding: "http://localhost/Notaria.SERVICE/toc_service/save_onboarding"
 };
 
 /*

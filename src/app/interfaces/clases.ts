@@ -41,6 +41,30 @@ export class DatosOnboarding {
    }
 }
 
+export class SaveOnboarding {
+
+    id: string;
+    nombre: string;
+    app: string;
+    apm: string;
+    correo: string;
+    
+    idTipoIdentificacion: string;
+    tokenFrontal: string;
+    imagenFrontal: string;
+    tokenReverso: string;
+    imagenReverso: string;
+    claveIdentificacion: string;
+    
+    tokenSelfie: string;
+    imagenSeilfie: string;
+    tokenIDEVsSelfie: string;
+
+    constructor() {
+        this.tokenIDEVsSelfie ="";
+    }
+}
+
 
 
 export class IdVsSelfie {

@@ -132,6 +132,13 @@
                           (propagar)="setTokenFrontal($event)"
                         ></app-captura-identi>
                       </div>
+                      <div class="col col-md-6 mx-auto" >
+                        <app-captura-identi 
+                          [identificacion]="identificacionSeleccionada"
+                          [lado]="ladoReverso"
+                          (propagar)="setTokenReverso($event)"
+                        ></app-captura-identi>
+                      </div>
                     </div>
                   </div>
 
@@ -230,3 +237,8 @@
     </div>
   </div>
 </div>
+
+<!-- 
+<pre style="color: whitesmoke; text-shadow: black 1px 1px 1px;">{{datosSaved | json}}</pre> -->
+
+
