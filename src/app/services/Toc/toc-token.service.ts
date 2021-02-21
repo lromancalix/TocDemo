@@ -7,7 +7,7 @@ import { promise } from 'protractor';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IdVsSelfie, DatosOnboarding, SaveOnboarding } from '../../interfaces/clases';
+import { IdVsSelfie, DatosOnboarding, SaveOnboarding, RostroVsTokenRequest } from '../../interfaces/clases';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +65,14 @@ export class TocTokenService {
 
   }
 
+  IsValidFaceVsToken(datos: RostroVsTokenRequest) {
+    return new Promise( ( resolve, reject ) => {
+      this.ValidFaceVsToken( datos )
+      .subscribe( (response: any) => {
+        resolve(response);
+      } );
+    } );
+  }
 
   //Consumo de servicios
   private getToken(): Observable<string> {
@@ -107,9 +115,6 @@ export class TocTokenService {
   private saveOnboarding(datos: SaveOnboarding): Observable<any> {
     let url = `${ environment.urlOnboarding }`;
     //let onboarding = this.MappingOnboarding(datos);
-    console.clear();
-    console.log("url onbording => ", url);
-    console.log("data onboarding => ", datos);
 
     return this.http.post(url, datos)
       .pipe(
@@ -121,34 +126,20 @@ export class TocTokenService {
     
   }
 
-
+  
+  private ValidFaceVsToken(datos: RostroVsTokenRequest ): Observable<any>{
+    let url = `${ environment.urlRostroVsToken }`;
+    return this.http.post(url, datos)
+      .pipe(
+        map( (response: any) => {
+          console.log("validacion =>", response);
+          return response;
+        } )
+      );
+  }
   
 
-  // private MappingOnboarding(datos: DatosOnboarding): SaveOnboarding {
-  //   let onboarding = new SaveOnboarding();
-  //   onboarding.nombre = datos.nombre;
-  //   onboarding.app = datos.app;
-  //   onboarding.apm = datos.apm;
-  //   onboarding.correo = datos.correo;
-  //   onboarding.claveIdentificacion = datos.identificacionFrontal.tipoIdentificacion.id;
 
-  //   onboarding.idTipoIdentificacion = datos.tipoIdentificacion.id;
-  //   onboarding.tokenFrontal = datos.identificacionFrontal.token;
-  //   onboarding.imagenFrontal = datos.identificacionFrontal.imagen;
-
-  //   onboarding.tokenReverso = datos.identificacionReverso.token;
-  //   onboarding.imagenReverso = datos.identificacionReverso.imagen;
-  //   onboarding.claveIdentificacion = datos.identificacionFrontal.tipoIdentificacion.id;
-    
-
-  //   onboarding.id = "0";
-  //   onboarding.imagenSeilfie = datos.selfie.imagen;
-  //   onboarding.tokenSelfie = datos.selfie.token;
-
-  //   onboarding.tokenIDEVsSelfie = "token selfie vs ife desde app";
-
-  //   return onboarding; 
-  // }
 
 }
 

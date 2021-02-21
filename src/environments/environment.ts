@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   //urlTocService: "/api/TOC"
   urlTocService: "http://localhost/Notaria.SERVICE/toc_service/get_token",
-  urlOnboarding: "http://localhost/Notaria.SERVICE/toc_service/save_onboarding"
+  urlOnboarding: "http://localhost/Notaria.SERVICE/toc_service/save_onboarding",
+  urlRostroVsToken: " http://localhost/Notaria.SERVICE/toc_service/rostro_vs_token_web"
 };
 
 /*

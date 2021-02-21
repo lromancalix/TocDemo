@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { TocTokenService } from '../../services/Toc/toc-token.service';
+import { RostroVsTokenRequest } from '../../interfaces/clases';
+import { Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -11,30 +15,23 @@ export class ValidacionesComponent implements OnInit {
 
   form: FormGroup;
 
+  request: RostroVsTokenRequest;
+
+  apiResponse: any;
   
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private router: Router,   
+    private fb: FormBuilder,  
+    private http: TocTokenService
+    ) {
+    this.request = new RostroVsTokenRequest();
+   }
 
 
   ngAfterViewInit(){
-    $(document).ready(function(){
-
-      $("#btn-foto-validaciones").click(function() {
-        $("#liveness").liveness({
-          locale: "es",
-          session_id: "dba340d2230c4a7eb06582492d676242",
-          http: true,
-          callback: function (token) {
-            alert(token);
-          },
-          failure: function (error) {
-            alert(error);
-          },
-        });
-      });
-
-    });
-}
+    
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -42,50 +39,77 @@ export class ValidacionesComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      nombre: ['', [Validators.required]],
-      app: ['', [Validators.required]],
-      apm: ['', [Validators.required]]
+      correo: ['', [Validators.required]]
     });
   }
 
-  get EsNombreValido() {
-    return this.form.get('nombre').invalid && this.form.get('nombre').touched;
+  get EsCorreoValido() {
+    return this.form.get('correo').invalid && this.form.get('correo').touched;
   }
-  get EsAppValido() {
-    return this.form.get('app').invalid && this.form.get('app').touched;
-  }
-  get EsApmValido() {
-    return this.form.get('apm').invalid && this.form.get('apm').touched;
-  }
+ 
 
-  Guardar() {
+  setTokenSelfie(datos: any){
+    this.request.photo = datos;
     
   }
 
-  CapturarImagen() {
+  // setSelfie(imagen) {
+  //   this.request.photo = imagen;
+  // }
+
+  
+
+  ValidarImagen() {
     if ( this.form.valid ) {
-      this.MostrarModal();
+      this.request.correo = this.form.get('correo').value;
+      this.Validar();
     }
   }
 
-  private MostrarModal() {
-    $(".modal").show();
+  Validar() {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Espere un momento...',
+      showConfirmButton: false
+    });
 
-   $("#liveness").liveness({
-     locale: "es",
-     session_id: $("#txt-nombre").val(),
-     http: true,
-     callback: function (token) {
-       $(".modal").hide();
-       alert("Usuario válido!");
-     },
-     failure: function (error) {
-       alert( error);
-       $(".modal").hide();
-       alert("Ocurrió un error al capturar la imagen.");
-     },
-   });
- }
+    Swal.showLoading();
+
+    this.http.IsValidFaceVsToken(this.request).then( (response: any) => {
+      this.apiResponse = response;
+      Swal.close();
+
+
+      if(response.status == "200") {
+        this.MostrarMSGExistoso(`Bienvenido ${ response.cliente.nombre }`);
+      } else {
+        this.MostrarMSGNOExistoso(response.descripcion);
+      }
+
+    } );
+
+  }
+ 
+  private MostrarMSGExistoso(texto: string) {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'success',
+      title: texto,
+      showConfirmButton: false,
+      timer: 2500
+    })
+    this.router.navigate(['/home']);
+  }
+  
+  private MostrarMSGNOExistoso(texto: string) {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'error',
+      title: texto,
+      showConfirmButton: true
+    })
+  }
 
 
 }

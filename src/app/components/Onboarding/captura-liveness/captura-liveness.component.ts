@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { TocTokenService } from '../../../services/Toc/toc-token.service';
 import { eStatusCaptura } from '../../../interfaces/enums';
+import Swal from 'sweetalert2';
 declare var $:any;
 
 @Component({
@@ -63,7 +64,7 @@ export class CapturaLivenessComponent implements OnInit {
        this.propagarSelfie.emit(image);
        $(".modal").hide();
        this.confirmar();
-       
+       this.MostrarMSGExistoso();
       },
      failure: (error) => {
       
@@ -72,10 +73,22 @@ export class CapturaLivenessComponent implements OnInit {
       this.statusCaptura = this.eStatusCaptura.CarturaFallada;
       this.confirmar();
       $(".modal").hide();
+      
      },
    });
  }
 
   confirmar() { $("#btn-confirmar").click(); }
+
+  
+  private MostrarMSGExistoso() {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'success',
+      title: "Imagen capturada",
+      showConfirmButton: false,
+      timer: 2500
+    })
+  }
 
 }

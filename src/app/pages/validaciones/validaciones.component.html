@@ -16,65 +16,34 @@
             <!-- Login Form -->
             <form
               [formGroup]="form"
-              (ngSubmit)="CapturarImagen()"
+              (ngSubmit)="ValidarImagen()"
               autocomplete="off"
               style="padding: 0% !important"
             >
               <div class="m-0">
-                <div class="">
-                  <div>
+                <div class="mb-3">
+                  <div class="mb-3">
                     <input
                       type="text"
                       class="fadeIn second"
-                      name="Nombre"
-                      placeholder="Nombre"
-                      formControlName="nombre"
-                      id="txt-nombre"
+                      name="correo"
+                      placeholder="correo"
+                      formControlName="correo"
+                      id="txt-correo"
                     />
-                    <div *ngIf="EsNombreValido">
+                    <div *ngIf="EsCorreoValido">
                       <p class="animate__animated animate__fadeInDown">
-                        <small>El nombre es requerido *</small>
+                        <small>El correo es requerido *</small>
                       </p>
                     </div>
                   </div>
 
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      formControlName="app"
-                      placeholder="Apellido Paterno"
-                    />
-                    <div *ngIf="EsAppValido">
-                      <p class="animate__animated animate__fadeInDown">
-                        <small>El apellido paterno es requerido *</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      formControlName="apm"
-                      placeholder="Apellido Materno"
-                    />
-                    <div *ngIf="EsApmValido">
-                      <p class="animate__animated animate__fadeInDown">
-                        <small>El apellido materno es requerido *</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      class="fadeIn second"
-                      name="App"
-                      placeholder="Identificación"
-                    />
-                    <!-- <small>Valor requerido</small> -->
-                  </div>
+                  <app-captura-liveness
+                  (selfieToken)="setTokenSelfie($event)"
+                  (propagarTokenSelfie)="setTokenSelfie($event)"
+                 
+                ></app-captura-liveness>
+
                 </div>
               </div>
 
@@ -85,9 +54,9 @@
                   [disabled]="form.invalid"
                   type="submit"
                   class="btn btn-info"
-                  style="width: 100%"                
+                  style="width: 100%"
                 >
-                  Validar <i class="fa fa-camera" aria-hidden="true"></i>
+                  Validar <i *ngIf="! form.invalid" class="fa fa-search animate__animated animate__fadeInDown" aria-hidden="true"></i>
                 </button>
               </div>
             </form>
@@ -106,18 +75,7 @@
 </div>
 
 
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Captura</h5>
-      </div>
-      <div class="modal-body" id="liveness">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <p>Espere un momento por favor...</p>
-      </div>
-    </div>
-  </div>
-</div>
+
+<pre style="color: whitesmoke; text-shadow: black 1px 1px 1px;">{{apiResponse | json}}</pre> 
+
+

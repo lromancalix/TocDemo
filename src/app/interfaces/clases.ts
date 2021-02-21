@@ -99,3 +99,14 @@ export class Response_IdVsSelfie {
     }
 }
 
+
+
+export class RostroVsTokenRequest {
+    correo: string;
+    photo: string;
+
+    constructor() {
+        this.correo = "";
+        this.photo = "";
+    }
+}
