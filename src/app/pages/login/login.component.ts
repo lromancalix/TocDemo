@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
       this.serviceToc.getTocTokenPromise().then(() => {
         this.cargando = false;
         this.sesionToken = this.serviceToc.tokenGenerado;
-        this.MostrarModal( this.sesionToken );
+        $("#link-login").click();
+        //this.MostrarModal( this.sesionToken );
       });
       
     }
