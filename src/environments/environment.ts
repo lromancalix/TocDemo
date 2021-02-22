@@ -14,6 +14,12 @@ export const environment = {
   // urlOnboarding: "http://dtecnoweb.net/toc_service/save_onboarding",
   // urlRostroVsToken: "http://dtecnoweb.net/toc_service/rostro_vs_token_web"
 
+    
+  // urlTocService: "/get_token",
+  // urlOnboarding: "/save_onboarding",
+  // urlRostroVsToken: "/rostro_vs_token_web"
+  
+
 };
 
 /*

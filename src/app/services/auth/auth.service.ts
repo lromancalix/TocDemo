@@ -41,7 +41,7 @@ export class AuthService extends CacheService {
     
     this.LogOut();
 
-    this.setToken("0123456789");
+    this.setToken(user);
    
      this.isLogged$.next(true);
 

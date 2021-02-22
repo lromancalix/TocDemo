@@ -1,27 +1,19 @@
 <!-- Login Form -->
-<form [formGroup]="formLogin" (ngSubmit)="Capturar()" autocomplete="off">
+<form [formGroup]="formLogin" (ngSubmit)="Ingresar()" autocomplete="off">
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
 
-      
-      <!-- Icon -->
-      <div class="fadeIn first">
-        <img
-          src="./assets/img/reconocimiento_facial.png"
-          id="icon"
-          alt="User Icon"
-          height="250"
-        />
-      </div>
+      <h2>Ingresa tus datos</h2>
+     <hr>
 
       <input
         type="text"
        
-        class="fadeIn second"
+        class="fadeIn second mb-3"
         name="usuario"
         formControlName="usuario"
-        placeholder="usuario"
+        placeholder="correo@correo.com"
       />
       <div *ngIf="EsUsuarioValido">
         <p class="animate__animated animate__fadeInDown">
@@ -29,7 +21,11 @@
         </p>
       </div>
 
-      <div class="mx-auto reconocimiento"></div>
+      <app-captura-liveness
+      (selfieToken)="setTokenSelfie($event)"
+      (propagarTokenSelfie)="setTokenSelfie($event)"
+     
+    ></app-captura-liveness>
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
@@ -61,18 +57,3 @@
   </div>
 </form>
 
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Captura</h5>
-      </div>
-      <div class="modal-body" id="liveness">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <p>Espere un momento por favor...</p>
-      </div>
-    </div>
-  </div>
-</div>

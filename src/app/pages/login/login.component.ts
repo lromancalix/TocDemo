@@ -3,6 +3,9 @@ import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TocTokenService } from '../../services/Toc/toc-token.service';
+import { RostroVsTokenRequest } from 'src/app/interfaces/clases';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -17,11 +20,15 @@ export class LoginComponent implements OnInit {
   public sesionToken: string;
   cargando: boolean;
 
+  request: RostroVsTokenRequest;
+  apiResponse: any;
+
   constructor(
     private logServ: AuthService, 
     private fb: FormBuilder,
-    private serviceToc: TocTokenService) { 
-   
+    private router: Router,   
+    private http: TocTokenService) { 
+      this.request = new RostroVsTokenRequest();
   }
 
   ngOnInit(): void {
@@ -30,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   LogIn() {
-    this.logServ.LogIn("","");
+    this.logServ.LogIn(this.request.correo,"");
   }
 
   get EsUsuarioValido() {
@@ -44,40 +51,75 @@ export class LoginComponent implements OnInit {
   }
 
 
-  Capturar() {
+  Ingresar() {
     
+
     if ( this.formLogin.valid ) {
-      this.cargando = true;
-      this.serviceToc.getTocTokenPromise().then(() => {
-        this.cargando = false;
-        this.sesionToken = this.serviceToc.tokenGenerado;
-        $("#link-login").click();
-        //this.MostrarModal( this.sesionToken );
+      this.request.correo = this.formLogin.get('usuario').value;
+
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'info',
+        title: 'Espere un momento...',
+        showConfirmButton: false
       });
+  
+      Swal.showLoading();
+
+      this.cargando = true;
+      // this.serviceToc.getTocTokenPromise().then(() => {
+      //   this.cargando = false;
+      //   this.sesionToken = this.serviceToc.tokenGenerado;
+      //   $("#link-login").click();
+        
+      // });
+
+      this.http.IsValidFaceVsToken(this.request).then( (response: any) => {
+        this.apiResponse = response;
+        Swal.close();
+  
+  
+        if(response.status == "200") {
+          this.LogIn();
+          this.MostrarMSGExistoso(`Bienvenido ${ response.cliente.nombre } ${ response.cliente.app } ${ response.cliente.apm }`);
+        } else {
+          this.MostrarMSGNOExistoso(response.descripcion);
+        }
+  
+      } );
+  
       
     }
    
   }
 
-  private MostrarModal( sesion: string ) {
-     $(".modal").show();
-
-    $("#liveness").liveness({
-      locale: "es",
-      session_id: sesion,
-      http: true,
-      //alt_server: "https://prod-capture.tocws.com/",
-      //url_lbac: "https://prod-api.7oc.cl/auto-capture/data/v2",
-      callback: function (token) {
-        $(".modal").hide();
-        $("#link-login").click();
-      },
-      failure: function (error) {
-        alert( error);
-        $(".modal").hide();
-        //alert("Usuario Incorrecto!");
-      },
-    });
+  private MostrarMSGExistoso(texto: string) {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'success',
+      title: texto,
+      showConfirmButton: false,
+      timer: 2500
+    })
+    this.router.navigate(['/home']);
   }
+  
+  private MostrarMSGNOExistoso(texto: string) {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'error',
+      title: texto,
+      showConfirmButton: true
+    })
+  }
+
+  
+
+
+  setTokenSelfie(datos: any){
+    this.request.photo = datos;
+    
+  }
+
 
 }

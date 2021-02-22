@@ -53,11 +53,6 @@ export class ValidacionesComponent implements OnInit {
     
   }
 
-  // setSelfie(imagen) {
-  //   this.request.photo = imagen;
-  // }
-
-  
 
   ValidarImagen() {
     if ( this.form.valid ) {

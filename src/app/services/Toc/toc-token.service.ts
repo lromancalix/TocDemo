@@ -19,6 +19,12 @@ export class TocTokenService {
   urlIdVsSelfie = "/v2/face-and-document";
   public tokenGenerado: string;
 
+
+  urlGetToken = "/get_token";
+  urlSaveOnboarding = "/save_onboarding";
+  urlRostroVsToken = "/rostro_vs_token_web";
+
+
   public cliente: any;
 
   // Object Data  
@@ -79,8 +85,9 @@ export class TocTokenService {
   //Consumo de servicios
   private getToken(): Observable<string> {
     
+    //let url =`${this.urlGetToken}`;
     let url =`${environment.urlTocService}`;
-
+console.log("token url", url);
     // Convert to JSON  
     var stringifiedData = JSON.stringify(this.myData);  
     
@@ -115,6 +122,7 @@ export class TocTokenService {
   }
 
   private saveOnboarding(datos: SaveOnboarding): Observable<any> {
+    //let url = `${ this.urlSaveOnboarding }`;
     let url = `${ environment.urlOnboarding }`;
     //let onboarding = this.MappingOnboarding(datos);
 
@@ -130,8 +138,11 @@ export class TocTokenService {
 
   
   private ValidFaceVsToken(datos: RostroVsTokenRequest ): Observable<any>{
-    let url = `${ environment.urlRostroVsToken }`;
-    return this.http.post(url, datos)
+   //let url = `${ this.urlRostroVsToken}`;
+   
+   let url = `${ environment.urlRostroVsToken }`;
+   console.log("face vs token " , url);
+   return this.http.post(url, datos)
       .pipe(
         map( (response: any) => {
         this.cliente = response;
