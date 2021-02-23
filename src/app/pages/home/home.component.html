@@ -1,24 +1,54 @@
-
-
 <div class="container">
-
-  <div class="row justify-content-md-center">
+  <!-- <div class="row justify-content-md-center">
       
     <div class="col col-lg-3">
-      <div class="card hvr-grow" (click) = "AbrirOnboarding()">
+      <div class="card hvr-grow" (click) = "AbrirOnboarding()" style="background-image: url('./assets/img/Onboarding.png');">
         <div class="card-body text-center " style="height: 250px">
           <h2>Onboarding</h2>
         </div>
       </div>
     </div>
     <div class="col col-lg-3">
-      <div class="card hvr-grow">
+      <div class="card hvr-grow" style="background-image: './assets/img/validacion.png';">
         <div class="card-body text-center" style="height: 250px">
           <h2>Validaciones</h2>
         </div>
       </div>
     </div>
-  </div>
-  
-</div> 
+  </div> -->
 
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <a class="nav-link" routerLink="/onboarding">
+        <div class="card m-3">
+          <img
+            class="card-img-top mx-auto"
+            src="./assets/img/onboarding.png"
+            alt="Card image"
+          />
+          <div class="card-body mx-auto">
+            <h4 class="card-title text-center">Onboarding</h4>
+
+            <!-- <a href="#" class="btn btn-primary text-center">See Profile</a> -->
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a class="nav-link" routerLink="/validaciones">
+        <div class="card m-3">
+          <img
+            class="card-img-top mx-auto"
+            src="./assets/img/validacion.png"
+            alt="Card image"
+          />
+          <div class="card-body mx-auto">
+            <h4 class="card-title text-center">Validaciones</h4>
+
+            <!-- <a href="#" class="btn btn-primary text-center">See Profile</a> -->
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

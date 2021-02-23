@@ -192,3 +192,9 @@ html {
     justify-content: center;
     min-height: 100vh;
   }
+
+  .logo {
+    
+    background-repeat: no-repeat;
+    
+  }
